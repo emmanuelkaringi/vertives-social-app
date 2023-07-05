@@ -65,6 +65,8 @@ module.exports = {
       if (!passwordMatch) {
         return res.status(401).json({ error: "Incorrect password" });
       }
+      req.session.authorized = true;
+      req.session.user = user;
 
       res.json({
         success: true,
@@ -75,4 +77,15 @@ module.exports = {
       res.status(404).json({ error: "User not found" });
     }
   },
+
+  logoutUser: async (req, res) => {
+    req.session.destroy((err)=>{
+      if(err){
+        res.send("Error logging out");
+      }else{
+        res.send("logged out successfully")
+      }
+    })
+
+  }
 };
