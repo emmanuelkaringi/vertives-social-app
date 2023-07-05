@@ -74,18 +74,17 @@ module.exports = {
       });
     } catch (error) {
       console.error("Error:", error);
-      res.status(404).json({ error: "User not found" });
+      res.status(500).json({ error: "Internal server error" });
     }
   },
 
   logoutUser: async (req, res) => {
-    req.session.destroy((err)=>{
-      if(err){
-        res.send("Error logging out");
-      }else{
-        res.send("logged out successfully")
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).send("Error logging out");
+      } else {
+        res.send("Logged out successfully");
       }
-    })
-
-  }
+    });
+  },
 };
