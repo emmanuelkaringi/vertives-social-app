@@ -8,7 +8,6 @@ CREATE PROCEDURE social.UpdateUser
     @password VARCHAR(255)
 AS
 BEGIN
-    SET NOCOUNT ON;
     
     UPDATE social.user_profile
     SET full_name = @full_name,

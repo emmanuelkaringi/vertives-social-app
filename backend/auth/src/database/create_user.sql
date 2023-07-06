@@ -8,8 +8,6 @@ CREATE PROCEDURE social.CreateUser
     @password VARCHAR(255)
 AS
 BEGIN
-    SET NOCOUNT ON;
-    
     INSERT INTO social.user_profile (full_name, username, email, DOB, city, profilepic_url, password)
     VALUES (@full_name, @username, @email, @DOB, @city, @profilepic_url, @password);
 END
