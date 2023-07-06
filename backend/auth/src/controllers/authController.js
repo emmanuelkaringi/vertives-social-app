@@ -1,5 +1,3 @@
-const config = require("../config/vertivesConfig");
-const mssql = require("mssql");
 const bcrypt = require("bcrypt");
 const getUser = require("../utils/getUser");
 
@@ -9,9 +7,9 @@ module.exports = {
       let user = req.body;
       let hashedPwd = await bcrypt.hash(user.password, 8);
 
-      let sql = await mssql.connect(config);
-      if (sql.connected) {
-        let emailCheck = await sql.request()
+      const pool = req.pool;
+      if (pool.connected) {
+        let emailCheck = await pool.request()
           .input("email", user.email)
           .query("SELECT * FROM social.user_profile WHERE email = @email");
 
@@ -19,7 +17,7 @@ module.exports = {
           return res.status(400).json({ error: "User already exists" });
         }
 
-        let usernameCheck = await sql.request()
+        let usernameCheck = await pool.request()
           .input("username", user.username)
           .query("SELECT * FROM social.user_profile WHERE username = @username");
 
@@ -27,7 +25,7 @@ module.exports = {
           return res.status(400).json({ error: "The username already exists" });
         }
 
-        let results = await sql.request()
+        let results = await pool.request()
           .input("full_name", user.full_name)
           .input("username", user.username)
           .input("email", user.email)
@@ -53,8 +51,10 @@ module.exports = {
 
   loginUser: async (req, res) => {
     let { username, email, password } = req.body;
+    const pool  = req.pool;
+
     try {
-      let user = await getUser(username, email);
+      let user = await getUser(username, email, pool);
       
       if (!user) {
         return res.status(404).json({ error: "User not found" });

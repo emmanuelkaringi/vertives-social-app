@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const userRoutes = require('./src/routes/userRoutes')
+const friendshipRoutes = require('./src/routes/friendshipRoutes')
 
 
 const app = express();
@@ -18,7 +19,7 @@ app.get("/", (req, res, next) => {
     res.send("Ok")
 });
 
-app.use(userRoutes)
+app.use(userRoutes, friendshipRoutes)
 
 app.use("*", (req, res, next) => {
     const error = new Error("Route Not found");
