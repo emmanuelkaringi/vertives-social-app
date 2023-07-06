@@ -5,6 +5,8 @@ const { v4 } = require("uuid");
 const authRoutes = require("./src/routes/authRoutes");
 const config = require("./src/config/vertivesConfig");
 const sql = require("mssql");
+const RedisStore = require("connect-redis").default
+const {createClient} = require("redis")
 
 const app = express();
 app.use(express.json());
@@ -15,6 +17,36 @@ async function startApp() {
   try {
     await pool.connect();
     console.log("App connected to database");
+
+    const redisClient =  createClient();
+    redisClient.connect()
+    console.log("Connected to Redis")
+    
+    const redisStore = new RedisStore({
+        client: redisClient,
+        prefix: ''
+    })
+
+
+const oneDay = 60 * 60 * 1000 * 24;
+app.use(
+  session({
+    store: redisStore,
+    secret: process.env.SECRET_KEY,
+    saveUninitialized: true,
+    genid: () => v4(),
+    resave: true,
+    rolling: true,
+    unset: 'destroy',
+    cookie: {
+      httpOnly: false,
+      secure: false, //For production, set to true (HTTPS request)
+      maxAge: oneDay,
+      domain:'localhost'
+    },
+  })
+);
+
 
     app.use((req, res, next) => {
       req.pool = pool;
@@ -60,20 +92,5 @@ async function startApp() {
     console.log(error);
   }
 }
-
-const oneDay = 60 * 60 * 1000 * 24;
-app.use(
-  session({
-    secret: process.env.SECRET_KEY,
-    saveUninitialized: true,
-    genid: () => v4(),
-    resave: false,
-    cookie: {
-      httpOnly: false,
-      secure: false, //For production, set to true (HTTPS request)
-      maxAge: oneDay,
-    },
-  })
-);
 
 startApp();
