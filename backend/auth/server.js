@@ -48,10 +48,7 @@ app.use(
 );
 
 
-    app.use((req, res, next) => {
-      req.pool = pool;
-      next();
-    });
+    app.use((req, res, next) => {req.pool = pool;next();});
 
     app.get(
       "/",

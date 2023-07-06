@@ -66,7 +66,7 @@ module.exports = {
         return res.status(401).json({ error: "Incorrect password" });
       }
       req.session.authorized = true;
-      req.session.user = user;
+      req.session.user = username;
 
       res.json({
         success: true,
