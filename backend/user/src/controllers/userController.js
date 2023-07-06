@@ -5,7 +5,7 @@ const getUser = require("../utils/getUser");
 
 async function getUserProfile(req, res) {
   try {
-    const { username, email } = req.body; // Assuming the username and email are provided in the request body
+    const { username, email } = req.body;
 
     const user = await getUser(username, email);
 
@@ -30,13 +30,13 @@ async function updateUserProfile(req, res) {
     const pool = await mssql.connect(config);
 
     const result = await pool.request()
-    .input("user_id", mssql.UniqueIdentifier, userId)
-    .input("full_name", mssql.VarChar(255), full_name)
-    .input("username", mssql.VarChar(50), username)
-    .input("DOB", mssql.date, DOB)
-    .input("city", mssql.VarChar(50), city)
-    .input("profilepic_url", mssql.VarChar(MAX), profilepic_url)
-    .execute("social.UpdateUser");
+                        .input("user_id", userId)
+                        .input("full_name", full_name)
+                        .input("username", username)
+                        .input("DOB", DOB)
+                        .input("city", city)
+                        .input("profilepic_url",profilepic_url)
+                        .execute("social.UpdateUser");
 
   if (result.rowsAffected[0] === 0) {
     return res.status(404).json({ message: "User profile not found" });
