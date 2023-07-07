@@ -6,3 +6,5 @@ BEGIN
     INSERT INTO social.friendship (follower_id, following_id)
     VALUES (@follower_id, @following_id);
 END
+
+EXEC social.FollowUser @follower_id = "", @following_id = ""

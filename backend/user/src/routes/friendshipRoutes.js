@@ -1,15 +1,10 @@
 const  friendshipRoutes = require('express').Router();
 const { getFollowers, getFollowing, followUser, unFollowUser } = require('../controllers/friendshipController')
 const { sessionAuth } = require('../middlewares/sessionMiddleware')
-// const newUserMiddleware = require('../middlewares/newUserMiddleware')
-
 
 
 friendshipRoutes.use(sessionAuth)
-// friendshipRoutes.get('/user/profile', getUserProfile)
-// userRoutes.put('/user/profile/:userId', updateUserProfile)
-// userRoutes.delete('/user/profile/:userId', deleteUserProfile)
-// authRoutes.post('/login', loginUser)
-// authRoutes.get('/logout', sessionAuth, logoutUser)
+friendshipRoutes.get('/user/followers/:userId', getFollowers)
+friendshipRoutes.get('/user/following/:userId', getFollowing)
 
 module.exports = friendshipRoutes;

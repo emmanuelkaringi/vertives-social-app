@@ -1,7 +1,5 @@
 const express = require('express');
 require('dotenv').config();
-const { createClient } = require('redis');
-const RedisStore = require("connect-redis").default;
 const userRoutes = require('./src/routes/userRoutes');
 const friendshipRoutes = require('./src/routes/friendshipRoutes');
 

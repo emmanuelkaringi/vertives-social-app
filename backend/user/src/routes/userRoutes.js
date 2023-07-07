@@ -6,7 +6,5 @@ userRoutes.use(sessionAuth)
 userRoutes.get('/user/profile', getUserProfile)
 userRoutes.put('/user/profile/:userId', updateUserProfile)
 userRoutes.delete('/user/profile/:userId', deleteUserProfile)
-// authRoutes.post('/login', loginUser)
-// authRoutes.get('/logout', sessionAuth, logoutUser)
 
 module.exports = userRoutes;
