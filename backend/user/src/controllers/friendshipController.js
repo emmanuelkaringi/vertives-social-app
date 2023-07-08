@@ -7,9 +7,10 @@ async function getFollowers(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = pool.request()
-      .input("user_id", mssql.UniqueIdentifier, userId);
-      
+      const request = pool
+        .request()
+        .input("user_id", mssql.UniqueIdentifier, userId);
+
       const result = await request.execute("social.GetFollowers");
       console.log(result);
 
@@ -30,9 +31,10 @@ async function getFollowing(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = pool.request()
-      .input("user_id", mssql.UniqueIdentifier, userId);
-      
+      const request = pool
+        .request()
+        .input("user_id", mssql.UniqueIdentifier, userId);
+
       const result = await request.execute("social.GetFollowing");
       console.log(result);
 
@@ -52,18 +54,19 @@ async function followUser(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = pool.request()
-      .input("followerId", mssql.UniqueIdentifier, followerId)
-      .input("followingId", mssql.UniqueIdentifier, followingId);
-      
+      const request = pool
+        .request()
+        .input("followerId", mssql.UniqueIdentifier, followerId)
+        .input("followingId", mssql.UniqueIdentifier, followingId);
+
       const result = await request.execute("social.FollowUser");
       const message = result.output.message;
 
       // Check if the user is already following the target user
-      if (message === 'You are already following this user') {
+      if (message === "You are already following this user") {
         res.status(400).json({ error: message });
       } else {
-        res.status(200).json({ message: 'User followed successfully' });
+        res.status(200).json({ message: "User followed successfully" });
       }
     }
   } catch (error) {
@@ -79,12 +82,13 @@ async function unFollowUser(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = await pool.request()
-      .input("followerId", mssql.UniqueIdentifier, followerId)
-      .input("followingId", mssql.UniqueIdentifier, followingId)
-      .execute("social.UnfollowUser");
+      const request = await pool
+        .request()
+        .input("followerId", mssql.UniqueIdentifier, followerId)
+        .input("followingId", mssql.UniqueIdentifier, followingId)
+        .execute("social.UnfollowUser");
 
-      res.status(200).json({ message: 'User unfollowed successfully' });
+      res.status(200).json({ message: "User unfollowed successfully" });
     }
   } catch (error) {
     console.error("Error occurred while unfollowing user:", error);
