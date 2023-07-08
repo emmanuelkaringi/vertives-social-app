@@ -1,11 +1,9 @@
 const joi = require("joi");
 
 const newPostSchema = joi.object({
-  new_password: joi
+  content_txt: joi
     .string()
     .required()
-    .pattern(new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")),
-    confirm_password:joi.string().required().valid(joi.ref('new_password')),
 });
 
 module.exports = { newPostSchema }

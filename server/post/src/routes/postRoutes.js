@@ -1,12 +1,16 @@
 const  postRoutes = require('express').Router();
-const {createPost, likePost, getAllPosts, getFollowingPosts, deletePost} = require('../controllers/postController')
+const {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unlikePost, deletePost} = require('../controllers/postController')
 const { sessionAuth } = require('../middlewares/sessionMiddleware')
 const newPostMiddleware = require('../middlewares/newPostMiddleware')
 
-// userRoutes.use(sessionAuth)
-// userRoutes.get('/profile', getUserProfile)
-// userRoutes.put('/profile/:userId', updateUserProfile)
-// userRoutes.delete('/profile/:userId', deleteUserProfile)
-// userRoutes.put('/profile/password/:userId', newPassMiddleware, updatePassword)
+postRoutes.use(sessionAuth)
+postRoutes.post('/post/new', newPostMiddleware, createPost)
+postRoutes.get('/post', getSinglePost)
+postRoutes.post('/post', likePost)
+postRoutes.delete('/post', deletePost)
+postRoutes.delete('/post', unlikePost)
+postRoutes.get('/feed/all', getAllPosts)
+postRoutes.get('/feed/following', getFollowingPosts)
+
 
 module.exports = postRoutes;
