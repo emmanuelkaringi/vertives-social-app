@@ -75,5 +75,28 @@ async function deleteUserProfile(req, res) {
   }
 }
 
+async function updatePassword(req, res) {
+  try {
+    const userId = req.params.userId;
+    const new_password = req.body.new_password;
 
-module.exports={getUserProfile, updateUserProfile, deleteUserProfile};
+    const pool = await mssql.connect(config);
+
+    const result = await pool.request()
+                        .input("user_id", mssql.UniqueIdentifier, userId)
+                        .input("new_password", mssql.VarChar(255), new_password)
+                        .execute("social.updatePassword");
+
+    if (result.rowsAffected[0] === 0) {
+      return res.status(404).json({ message: "User profile not found" });
+    }
+
+    res.json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+module.exports={getUserProfile, updateUserProfile, deleteUserProfile, updatePassword};
