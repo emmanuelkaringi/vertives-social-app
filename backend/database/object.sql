@@ -51,7 +51,7 @@ CREATE TABLE social.comments (
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     is_deleted BIT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE CASCADE
+    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE NO ACTION
 );
 GO
 
@@ -63,7 +63,7 @@ CREATE TABLE social.replies (
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     is_deleted BIT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE CASCADE
+    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE NO ACTION
 );
 GO
 
@@ -75,9 +75,9 @@ CREATE TABLE social.likes (
     comment_id UNIQUEIDENTIFIER,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     FOREIGN KEY (sender_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (recipient_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE CASCADE,
-    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE CASCADE
+    FOREIGN KEY (recipient_id) REFERENCES social.user_profile(user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE NO ACTION,
+    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE NO ACTION
 );
 GO
 
@@ -90,9 +90,9 @@ CREATE TABLE social.notifications (
     notification_type NVARCHAR(50) NOT NULL,
     timestamp DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     FOREIGN KEY (recipient_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (sender_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE CASCADE,
-    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE CASCADE
+    FOREIGN KEY (sender_id) REFERENCES social.user_profile(user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (post_id) REFERENCES social.posts(post_id) ON DELETE NO ACTION,
+    FOREIGN KEY (comment_id) REFERENCES social.comments(comment_id) ON DELETE NO ACTION
 );
 GO
 
@@ -101,6 +101,6 @@ CREATE TABLE social.friendship (
     follower_id UNIQUEIDENTIFIER NOT NULL,
     following_id UNIQUEIDENTIFIER NOT NULL,
     FOREIGN KEY (follower_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (following_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE
+    FOREIGN KEY (following_id) REFERENCES social.user_profile(user_id) ON DELETE NO ACTION
 );
 GO

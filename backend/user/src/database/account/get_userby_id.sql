@@ -2,7 +2,6 @@ CREATE PROCEDURE social.GetUserByID
     @user_id UNIQUEIDENTIFIER
 AS
 BEGIN
-    SET NOCOUNT ON;
     
     SELECT *
     FROM social.user_profile
