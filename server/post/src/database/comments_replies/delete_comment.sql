@@ -15,7 +15,8 @@ BEGIN
     WHERE comment_id = @commentId;
 
     -- Delete the comment from the comments table
-    DELETE FROM social.comments
+    UPDATE social.comments
+    SET is_deleted = 1
     WHERE comment_id = @commentId;
 END;
 GO

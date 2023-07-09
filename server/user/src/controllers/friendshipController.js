@@ -7,8 +7,7 @@ async function getFollowers(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = pool
-        .request()
+      const request = pool.request()
         .input("user_id", mssql.UniqueIdentifier, userId);
 
       const result = await request.execute("social.GetFollowers");
@@ -31,8 +30,7 @@ async function getFollowing(req, res) {
     const pool = await mssql.connect(config);
 
     if (pool.connected) {
-      const request = pool
-        .request()
+      const request = pool.request()
         .input("user_id", mssql.UniqueIdentifier, userId);
 
       const result = await request.execute("social.GetFollowing");

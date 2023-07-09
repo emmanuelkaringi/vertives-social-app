@@ -1,4 +1,4 @@
-CREATE PROCEDURE social.LikeComment
+CREATE OR ALTER PROCEDURE social.LikeComment
     @sender_id UNIQUEIDENTIFIER,
     @comment_id UNIQUEIDENTIFIER
 AS
@@ -20,8 +20,8 @@ BEGIN
         BEGIN TRANSACTION;
 
         -- Insert a new like record
-        INSERT INTO social.likes (like_id, sender_id, comment_id, created_at)
-        VALUES (NEWID(), @sender_id, @comment_id, SYSDATETIME());
+        INSERT INTO social.likes (like_id, sender_id, recipient_id, comment_id, created_at)
+        VALUES (NEWID(), @sender_id, (SELECT user_id FROM social.comments WHERE comment_id = @comment_id), @comment_id, SYSDATETIME());
 
         -- Increment the like count for the comment
         UPDATE social.comments
