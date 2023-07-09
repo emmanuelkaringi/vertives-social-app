@@ -190,7 +190,7 @@ async function unlikePost(req, res) {
 
 async function deletePost(req, res) {
     try {
-        const { post_id } = req.body; // Assuming the post_id is provided in the request body
+        const { post_id } = req.body;
         const pool = req.pool;
 
         if (pool.connected) {
