@@ -1,6 +1,7 @@
 import React from 'react'
 import LogoSearch from '../LogoSearch/LogoSearch'
 import ProfileCard from '../profileCard/ProfileCard'
+import './profile.css'
 
 const Profile = () => {
   return (
