@@ -1,0 +1,7 @@
+.postside{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    top: 1rem;
+    overflow: auto;
+}

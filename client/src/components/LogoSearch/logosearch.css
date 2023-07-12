@@ -1,6 +1,5 @@
 .logosearch{
     display: flex;
-    gap: 0.75rem;
 }
 
 .search{
@@ -8,11 +7,14 @@
     background-color: var(--inputColor);
     border-radius: 10px;
     padding: 5px;
+    width: 100%;
+    gap: 0.5rem;
 }
 .search>input{
     background-color: transparent;
     border: none;
     outline: none;
+    width: 100%;
 }
 
 .search-icon{

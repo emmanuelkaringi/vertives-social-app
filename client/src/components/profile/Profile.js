@@ -1,5 +1,5 @@
 import React from 'react'
-import LogoSearch from '../LogoSearch/LogoSearch'
+//import LogoSearch from '../LogoSearch/LogoSearch'
 import ProfileCard from '../profileCard/ProfileCard'
 import FollowersCard from '../FollowersCard/FollowersCard'
 import './profile.css'
@@ -7,7 +7,7 @@ import './profile.css'
 const Profile = () => {
   return (
     <div className='profile'>
-        <LogoSearch />
+       <span>Vertives</span>
         <ProfileCard />
         <FollowersCard />
     </div>
