@@ -7,6 +7,7 @@ const LeftSide = () => {
     <div className='profile'>
        <span>Vertives</span>
         <ProfileCard />
+        <button className='button s-button'>Share</button>
     </div>
   )
 }

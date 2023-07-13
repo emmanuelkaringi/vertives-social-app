@@ -36,6 +36,11 @@
     font-weight: bold;
 }
 
+.name > span:nth-of-type(1):hover{
+    cursor: pointer;
+    color: var(--buttonHV);
+}
+
 .fc-button{
     height: 2rem;
     padding-left: 20px;

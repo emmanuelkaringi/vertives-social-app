@@ -14,7 +14,7 @@ function FollowersCard() {
                     <div>
                         <img src={follower.profilePicture} alt='' className='followerImg' />
                         <div className='name'>
-                            <span>{follower.name}</span>
+                            <span className='fname'>{follower.name}</span>
                             <span>@{follower.username}</span>
                         </div>
                     </div>

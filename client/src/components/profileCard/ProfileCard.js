@@ -3,6 +3,9 @@ import Cover from "../../img/cover.jpg";
 import Profile from "../../img/profile.jpg";
 import "./profilecard.css";
 
+
+const ProfilePage = true;
+
 const ProfileCard = () => {
   return (
     <div className="profilecard">
@@ -27,11 +30,19 @@ const ProfileCard = () => {
               <span>10</span>
               <span>Followers </span>
             </div>
+
+            {ProfilePage && (
+              <>
+              <div className="follow">
+                <span>5</span>
+                <span>Posts</span>
+              </div>
+              </>
+            )}
         </div>
       </div>
-      <span>My Profile</span>
-
-      <button className='button s-button'>Share</button>
+      {ProfilePage ? "" : <span>My Profile</span>}
+      
     </div>
   );
 };
