@@ -81,3 +81,11 @@
     margin-bottom: 1rem;
     cursor: pointer;
 }
+
+
+.s-button{
+    top: 1rem;
+    height: 3rem;
+    width: 80%;
+    align-self: center;
+}

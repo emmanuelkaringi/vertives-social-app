@@ -1,6 +1,7 @@
 import React from 'react';
 import LeftSide from '../../components/LeftSide/LeftSide';
 import MiddleSide from '../../components/MiddleSide/MiddleSide';
+import RightSide from '../../components/RightSide/RightSide';
 import './feed.css'
 
 const Feed = () => {
@@ -8,7 +9,7 @@ const Feed = () => {
     <div className='feed'>
       <LeftSide />
       <MiddleSide />
-        <div className='followShow'>Follow</div>
+      <RightSide />
     </div>
   )
 }

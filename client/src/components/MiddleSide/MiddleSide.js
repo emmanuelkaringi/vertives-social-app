@@ -7,7 +7,13 @@ import './MiddleSide.css'
 const MiddleSide = () => {
   return (
     <div className='postside'>
-        <LogoSearch />
+      <div className='navIcons'>
+        <i class="fa fa-house"></i>
+        <i class="fa fa-bell"></i>
+        <i class="fa fa-gear"></i>
+        <i class="fa fa-envelope"></i>
+      </div>
+      
         <PostShare />
         <Posts />
     </div>

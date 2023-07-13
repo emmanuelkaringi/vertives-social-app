@@ -30,6 +30,8 @@ const ProfileCard = () => {
         </div>
       </div>
       <span>My Profile</span>
+
+      <button className='button s-button'>Share</button>
     </div>
   );
 };
