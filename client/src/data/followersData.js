@@ -2,27 +2,30 @@ import Profile from '../img/profile.jpg';
 
 export const Followers = [
     {
-        name: "Claire Wanjiku",
-        username: "claire",
-        img: Profile
+        name: "Acharlota Marcel",
+        username: "Marcel",
+        profilePicture: "https://robohash.org/impeditautest.png",
+        city: "Kisumu"
     },
 
     {
-        name: "Claire Wanjiku",
-        username: "claire",
-        img: 'https://robohash.org/impeditautest.png'
+        name: "Acharlota Marcel",
+        username: "Marcel",
+        profilePicture: "https://robohash.org/impeditautest.png",
+        city: "Kisumu"
     },
     
     {
-        name: "Claire Wanjiku",
-        username: "claire",
-        img: 'https://robohash.org/impeditautest.png'
+        name: "Acharlota Marcel",
+        username: "Marcel",
+        profilePicture: "https://robohash.org/impeditautest.png",
+        city: "Kisumu"
     },
-    
+
     {
-        name: "Claire Wanjiku",
-        username: "claire",
-        img: 'https://robohash.org/impeditautest.png'
-    },
-    
+        name: "Acharlota Marcel",
+        username: "Marcel",
+        profilePicture: "https://robohash.org/impeditautest.png",
+        city: "Kisumu"
+    }
 ]

@@ -12,7 +12,7 @@ function FollowersCard() {
             return(
                 <div className='follower'>
                     <div>
-                        <img src={follower.img} alt='' className='followerImg' />
+                        <img src={follower.profilePicture} alt='' className='followerImg' />
                         <div className='name'>
                             <span>{follower.name}</span>
                             <span>@{follower.username}</span>

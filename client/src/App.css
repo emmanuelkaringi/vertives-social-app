@@ -9,7 +9,7 @@
     --buttonBg: #455A64;
     --buttonHV: #71A894;
     --inputColor: rgba(40, 52, 62, 0.07);
-    --photo: #FE9C69;
+    --photo: #DD8762;
     --video: #455A64
   }
 
@@ -36,4 +36,9 @@
     color: var(--buttonHV);
     background: transparent;
     border: 2px solid var(--buttonHV);
+  }
+
+
+  ::-webkit-scrollbar{
+    display: none;
   }

@@ -2,9 +2,9 @@ import React from 'react'
 //import LogoSearch from '../LogoSearch/LogoSearch'
 import ProfileCard from '../profileCard/ProfileCard'
 import FollowersCard from '../FollowersCard/FollowersCard'
-import './profile.css'
+import './leftside.css'
 
-const Profile = () => {
+const LeftSide = () => {
   return (
     <div className='profile'>
        <span>Vertives</span>
@@ -14,4 +14,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default LeftSide

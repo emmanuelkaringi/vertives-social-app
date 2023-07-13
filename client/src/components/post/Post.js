@@ -1,13 +1,27 @@
 import React from 'react'
-import LogoSearch from '../LogoSearch/LogoSearch'
-import PostShare from '../PostShare/PostShare'
 import './post.css'
 
-const Post = () => {
+const Post = ({data}) => {
   return (
-    <div className='postside'>
-        <LogoSearch />
-        <PostShare />
+    <div className='Post'>
+          <div className='detail'>
+            <span className='username'><b>@{data.username}</b></span>
+            <span> {data.content_txt}</span>
+        </div>
+
+        <img src={data.media_url} alt='' />
+
+        <div className='postReact'>
+            <span>{data.liked?<i class="fa fa-thumbs-up"/>:<i class="fa fa-thumbs-down"/>}</span>
+            <span><i class="fa fa-comment"></i></span>
+            <span><i class="fa fa-share-nodes"></i></span>
+        </div>
+
+        <div className='reactDetails'>
+            <span>{data.like_count} <b>likes</b></span>
+            <span>{data.comment_count} <b>comments</b></span>
+        </div>
+
     </div>
   )
 }
