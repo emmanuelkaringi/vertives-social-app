@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ProfileModal from '../ProfileModal/ProfileModal'
 import './infocard.css'
 
 const InfoCard = () => {
+
+  const [modalOpened, setModalOpened] = useState(false)
+
   return (
     <div className='InfoCard'>
         <div className='info-head'>
             <h4>Your Info</h4>
-            <span><i class="fa fa-pen"></i></span>
-            
+            <span><i class="fa fa-pen" onClick={()=>setModalOpened(true)}></i></span>
+            <ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened}/>
         </div>
 
         <div className='info'>

@@ -6,6 +6,7 @@ const Auth = () => {
     <div className="Auth">
 
       <Login/>
+      {/* <Signup /> */}
     </div>
   );
 };
