@@ -1,0 +1,28 @@
+.Post{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--cardColor);
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.username{
+    color: #DD8762;
+}
+
+
+.Post>img{
+     width: 100%;
+     max-height: 20rem;
+     object-fit: cover;
+     border-radius: 0.5rem;
+}
+
+.postReact,
+.reactDetails{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    color: var(--buttonHV);
+}

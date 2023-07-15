@@ -1,0 +1,22 @@
+.profile,
+.ProfileLeft{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    overflow: auto;
+}
+
+.profile>span{
+    font-size: 20px;
+    font-weight: bold;
+    color: #71A894;
+    align-self: flex-start;
+}
+
+.s-button{
+    top: 1rem;
+    height: 3rem;
+    width: 80%;
+    align-self: center;
+}
