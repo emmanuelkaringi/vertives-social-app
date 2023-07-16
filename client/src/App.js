@@ -4,8 +4,10 @@ import SignUp from './pages/Auth/SignUp';
 import Login from './pages/Auth/Login';
 import Feed from './pages/Feed/Feed';
 import {createBrowserRouter,Route,createRoutesFromElements,RouterProvider} from "react-router-dom";
+import { AuthProvider } from "./AuthContext";
 
 const myRouter = createBrowserRouter(
+
   createRoutesFromElements(
     <Route>
    
@@ -19,7 +21,11 @@ const myRouter = createBrowserRouter(
 );
 
 function App() {
-    return <RouterProvider router={myRouter} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={myRouter} />
+    </AuthProvider>
+  );
 }
 
 export default App;

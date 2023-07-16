@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 import axios from "axios";
 import "./Auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,20 +26,21 @@ const Login = () => {
     };
 
     console.log(loginData);
-    // Store the token in localStorage
-
     try {
-      const response = await axios.post(
-        "http://localhost:4000/login",
-        loginData,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(response);
-
+      const response = await axios.post("http://localhost:4000/login", loginData, {
+        withCredentials: true,
+      });
+  
+      // Get the user_id from the server's response
+      const user_id = response.data.user.user_id;
+  
+      // Create the authenticated user object with the fetched user_id
+      const authenticatedUser = { user_id };
+  
+      // Set the authenticated user in the AuthContext
+      setUser(authenticatedUser);
+  
       // Handle successful login response here
-
       navigate("/feed");
     } catch (error) {
       if (error.response) {

@@ -71,6 +71,7 @@ module.exports = {
       res.json({
         success: true,
         message: "Login successful",
+        user: user,
       });
     } catch (error) {
       console.error("Error:", error);

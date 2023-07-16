@@ -1,12 +1,19 @@
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import "./postshare.css";
 import ProfileImg from "../../img/profile.jpg";
+import { useAuth } from "../../AuthContext";
 
 const PostShare = () => {
+  const { user } = useAuth();
+  const user_id = user?.user_id;
+  const [content_txt, setcontent_txt] = useState("");
+  const [media_url, setmedia_url] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const imageRef = useRef();
   const videoRef = useRef();
+  const cloudName=process.env.REACT_APP_CLOUDINARY_NAME
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -26,11 +33,95 @@ const PostShare = () => {
     }
   };
 
+  const uploadImage = async (files) => {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("upload_preset", 'g3vfolch');
+    fetch( `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setmedia_url(data.secure_url);
+      });
+  };
+
+  const uploadVideo = async (files) => {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("upload_preset", 'g3vfolch');
+    fetch( `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setmedia_url(data.secure_url);
+      });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Check if contentTxt is empty before submitting
+    if (!content_txt) {
+      console.error("Post content is empty");
+      return;
+    }
+  
+    // Check if either image or video is selected
+    if (image) {
+      // Upload the image to Cloudinary
+      uploadImage(image.image);
+    } else if (video) {
+      // Upload the video to Cloudinary
+      uploadVideo(video.video);
+    } else {
+      // If neither image nor video is selected, proceed without media_url
+      createPost();
+    }
+  };
+  
+  const createPost = async () => {
+    const newPost = {
+      user_id: user_id,
+      content_txt: content_txt,
+      media_url: media_url,
+    };
+  
+    try {
+      // Make a POST request to the server to create the new post
+      const response = await axios.post(
+        "http://localhost:4020/post/new", // Replace with your server's endpoint for creating posts
+        newPost,
+        { withCredentials: true }
+      );
+  
+      // Handle successful post creation response here
+      console.log(response);
+      console.log(newPost)
+  
+      // Clear form fields and reset state as needed
+      setcontent_txt(""); // Assuming you have a state variable named contentTxt to store the post content
+      setImage(null); // Clear the image state
+      setVideo(null); // Clear the video state
+    } catch (error) {
+      // Handle errors if the post creation fails
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="PostShare">
       <img src={ProfileImg} alt="" />
       <div>
-        <input type="text" placeholder="What is happening?" />
+        <input
+          type="text"
+          placeholder="What is happening?"
+          value={content_txt} // Bind the input value to the state variable
+          onChange={(e) => setcontent_txt(e.target.value)}
+        />
         <div className="postOptions">
           <div
             className="option"
@@ -46,7 +137,9 @@ const PostShare = () => {
           >
             <i className="fa fa-video"> Video</i>
           </div>
-          <button className="button ps-button">Share</button>
+          <button className="button ps-button" onClick={handleSubmit}>
+            Share
+          </button>
           <div style={{ display: "none" }}>
             <input
               type="file"
@@ -72,10 +165,13 @@ const PostShare = () => {
           </div>
         )}
         {video && (
-            <div className='previewVideo'>
-                <i className="fa fa-light fa-xmark" onClick={()=>setVideo(null)}></i>
-                <video src={video.video} alt="" />
-            </div>
+          <div className="previewVideo" onClick={() => setVideo(null)}>
+            <i
+              className="fa fa-light fa-xmark"
+              
+            ></i>
+            <video src={video.video} alt="" />
+          </div>
         )}
       </div>
     </div>
