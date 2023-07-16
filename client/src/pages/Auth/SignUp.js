@@ -19,7 +19,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirm_password) {
-      setPasswordError("Password and confirm password do not match");
+      setPasswordError("*Password and confirm password do not match");
       return;
     }
     const registrationData = {
@@ -74,6 +74,7 @@ const SignUp = () => {
         <div>
           <label>Full Name</label>
           <input
+          required
             type="text"
             placeholder="Full Name"
             className="info-input"
@@ -84,6 +85,7 @@ const SignUp = () => {
 
           <label>Username</label>
           <input
+          required
             type="text"
             placeholder="Username"
             className="info-input"
@@ -94,6 +96,7 @@ const SignUp = () => {
 
           <label>Email</label>
           <input
+          required
             type="email"
             placeholder="Email"
             className="info-input"
@@ -104,6 +107,7 @@ const SignUp = () => {
 
           <label>Date of Birth</label>
           <input
+          required
             type="date"
             placeholder="Date of Birth"
             className="info-input"
@@ -114,6 +118,7 @@ const SignUp = () => {
 
           <label>City</label>
           <input
+          required
             type="text"
             placeholder="City"
             className="info-input"
@@ -124,6 +129,7 @@ const SignUp = () => {
           <div>
             <label>Password</label>
             <input
+            required
               type="password"
               placeholder="Enter a Password"
               className="info-input"
@@ -134,6 +140,7 @@ const SignUp = () => {
 
             <label>Confirm Password</label>
             <input
+            required
               type="password"
               placeholder="Confirm Your Password"
               className="info-input"
@@ -148,9 +155,6 @@ const SignUp = () => {
             Signup
           </button>
 
-          {signupStatus === "success" && (
-            <p className="toast success">Signup successful!</p>
-          )}
           {signupStatus === "error" && (
             <p className="toast error">Signup failed. Please try again.</p>
           )}
