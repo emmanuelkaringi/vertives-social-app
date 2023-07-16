@@ -4,7 +4,7 @@ import Profile from "../../img/profile.jpg";
 import "./profilecard.css";
 
 
-const ProfilePage = true;
+const ProfilePage = false;
 
 const ProfileCard = () => {
   return (

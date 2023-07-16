@@ -1,56 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Auth.css";
 
-const Auth = () => {
+const SignUp = () => {
   return (
     <div className="Auth">
-
-      <Login/>
-      {/* <Signup /> */}
-    </div>
-  );
-};
-
-function Login() {
-  return (
-    <div>
-      <form className="info-form auth-form">
-        <h3>Log In</h3>
-
-        <div>
-          <label>Email or Username</label>
-          <input
-            type="text"
-            placeholder="Email or Username"
-            className="info-input"
-            name="username"
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter a Password"
-            className="info-input"
-            name="password"
-          />
-
-          <button className="button info-button" type="submit">
-            Login
-          </button>
-
-          <div className="login_option">
-            <span style={{ fontSize: "12px" }}>
-              Don't have an account? Signup
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-function Signup() {
-  return (
-    <div>
       <form className="info-form auth-form">
         <h3>Sign up</h3>
 
@@ -117,17 +71,13 @@ function Signup() {
           </button>
 
           <div className="login_option">
-            <span style={{ fontSize: "12px" }}>
-              Already have an account? Login
+            <span>
+              <Link to="/login">Already have an account? Login</Link>
             </span>
           </div>
         </div>
       </form>
     </div>
   );
-}
-
-export default Auth;
-
-// password
-// confirmpassword
+};
+export default SignUp;

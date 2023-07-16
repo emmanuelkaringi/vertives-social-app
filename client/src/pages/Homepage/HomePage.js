@@ -1,6 +1,9 @@
 import React from "react";
 import Landing from "../../img/Illustration.png";
+import { Link } from 'react-router-dom';
 import "./HomePage.css";
+
+
 
 const HomePage = () => {
   return (
@@ -9,9 +12,9 @@ const HomePage = () => {
         <nav>
           <h1 className="logo">Vertives</h1>
           <ul>
-            <li>Home</li>
-            <li>LogIn</li>
-            <li>Sign Up</li>
+            <Link to='/'><li>Home</li></Link>
+            <Link to='/login'><li>LogIn</li></Link>
+            <Link to='/signup'><li>Sign Up</li></Link>
           </ul>
         </nav>
       </header>
@@ -23,7 +26,7 @@ const HomePage = () => {
             Discover a new level of social networking - one that nourishes the
             soul and celebrates the essence of human connection.
           </p>
-          <button className="button l-button">Get Started</button>
+          <Link to='/signup' ><button className="button l-button">Get Started</button></Link>
         </div>
       </div>
     </div>

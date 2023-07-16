@@ -37,8 +37,10 @@ h3{
 }
 
 .login_option{
+    color: #303031;
     font-size: 0.8rem;
     margin-top: 1.4rem;
+    cursor:pointer;
 }
 /* .Auth{
     display: flex;
