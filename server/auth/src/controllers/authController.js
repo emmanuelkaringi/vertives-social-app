@@ -57,16 +57,16 @@ module.exports = {
       let user = await getUser(username, email, pool);
       
       if (!user) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "User not found. Please check your email/username and password." });
       }
       
       let passwordMatch = await bcrypt.compare(password, user.password);
       
       if (!passwordMatch) {
-        return res.status(401).json({ error: "Incorrect password" });
+        return res.status(401).json({ error: "Incorrect password. Please try again." });
       }
       req.session.authorized = true;
-      req.session.user = username;
+      req.session.user = user;
 
       res.json({
         success: true,
