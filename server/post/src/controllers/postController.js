@@ -15,7 +15,7 @@ async function createPost(req, res) {
             res.json({
                 success: true,
                 message: "Post created successfully",
-                data: results.recordsets[0]
+                data: results.recordset[0]
             });
         } else {
             throw new Error("Internal server error");
@@ -41,7 +41,7 @@ async function getAllPosts(req, res) {
             res.json({
                 success: true,
                 message: "Posts retrieved successfully",
-                data: result.recordsets
+                data: result.recordset
             });
         }  else {
             throw new Error("Internal server error");
@@ -58,7 +58,7 @@ async function getAllPosts(req, res) {
 
 async function getFollowingPosts(req, res) {
     try {
-        let userId = req.body.user_id;  // Assuming the user ID is in the "user_id" property of the request body
+        let userId = req.body.user_id;  
         const pool = req.pool;
 
         if (pool.connected) {
@@ -69,7 +69,7 @@ async function getFollowingPosts(req, res) {
             res.json({
                 success: true,
                 message: "Posts retrieved successfully",
-                data: results.recordsets  // Use "recordset" instead of "recordsets" for a single result set
+                data: results.recordset
             });
         } else {
             throw new Error("Internal server error");
@@ -87,7 +87,7 @@ async function getFollowingPosts(req, res) {
 
 async function getSinglePost(req, res) {
     try {
-        let postId = req.body.post_id;  // Assuming the user ID is in the "user_id" property of the request body
+        let postId = req.body.post_id;
         const pool = req.pool;
 
         if (pool.connected) {
@@ -98,7 +98,7 @@ async function getSinglePost(req, res) {
             res.json({
                 success: true,
                 message: "Post retrieved successfully",
-                data: results.recordset  // Use "recordset" instead of "recordsets" for a single result set
+                data: results.recordset
             });
         } else {
             throw new Error("Internal server error");

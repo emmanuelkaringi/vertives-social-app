@@ -10,6 +10,7 @@ async function getUserProfile(req, res) {
     const user = await getUser(username, email);
 
     const userProfile = {
+      user_id: user.user_id,
       name: user.full_name,
       username: user.username,
       profilePicture: user.profilepic_url,

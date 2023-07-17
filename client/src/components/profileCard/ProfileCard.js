@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Cover from "../../img/cover.jpg";
 import Profile from "../../img/profile.jpg";
 import "./profilecard.css";
+import { useAuth } from "../../AuthContext";
+import axios from 'axios'
 
 
 const ProfilePage = false;
 
 const ProfileCard = () => {
+  const [user, setUser] = useState(null);
+  const { user_id } = useAuth();
+
+  const getUser = async ()=> {
+    const response = await axios.get('http://localhost:4010/profile')
+  }
   return (
     <div className="profilecard">
       <div className="profileimg">

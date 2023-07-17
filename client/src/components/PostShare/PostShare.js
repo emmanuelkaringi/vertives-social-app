@@ -16,6 +16,7 @@ const PostShare = () => {
   const cloudName=process.env.REACT_APP_CLOUDINARY_NAME
 
   const onImageChange = (e) => {
+    console.log(e.target.files)
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
       setImage({
@@ -36,29 +37,35 @@ const PostShare = () => {
   const uploadImage = async (files) => {
     const formData = new FormData();
     formData.append("file", files[0]);
-    formData.append("upload_preset", 'g3vfolch');
-    fetch( `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setmedia_url(data.secure_url);
-      });
+    formData.append("upload_preset", "rcjzhiuu");
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData,
+      );
+
+      setmedia_url(response.data.secure_url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   const uploadVideo = async (files) => {
     const formData = new FormData();
     formData.append("file", files[0]);
-    formData.append("upload_preset", 'g3vfolch');
-    fetch( `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setmedia_url(data.secure_url);
-      });
+    formData.append("upload_preset", "rcjzhiuu");
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+        formData,
+      );
+
+      setmedia_url(response.data.secure_url);
+    } catch (error) {
+      console.error("Error uploading video:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +76,6 @@ const PostShare = () => {
       console.error("Post content is empty");
       return;
     }
-  
     // Check if either image or video is selected
     if (image) {
       // Upload the image to Cloudinary
@@ -87,23 +93,21 @@ const PostShare = () => {
     const newPost = {
       user_id: user_id,
       content_txt: content_txt,
-      media_url: media_url,
+      media_url: media_url.toString(),
     };
   
     try {
-      // Make a POST request to the server to create the new post
       const response = await axios.post(
-        "http://localhost:4020/post/new", // Replace with your server's endpoint for creating posts
+        "http://localhost:4020/post/new",
         newPost,
         { withCredentials: true }
       );
   
-      // Handle successful post creation response here
       console.log(response);
       console.log(newPost)
   
       // Clear form fields and reset state as needed
-      setcontent_txt(""); // Assuming you have a state variable named contentTxt to store the post content
+      setcontent_txt("");
       setImage(null); // Clear the image state
       setVideo(null); // Clear the video state
     } catch (error) {
@@ -161,7 +165,7 @@ const PostShare = () => {
               className="fa fa-light fa-xmark"
               onClick={() => setImage(null)}
             ></i>
-            <img src={image.image} alt="" />
+            <img src={image.image} alt="" publicid={media_url}/>
           </div>
         )}
         {video && (
