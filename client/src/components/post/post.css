@@ -22,7 +22,7 @@
 .postReact,
 .reactDetails{
     display: flex;
-    align-items: flex-start;
+    flex-direction: row-reverse;
     gap: 1.5rem;
     color: var(--buttonHV);
 }

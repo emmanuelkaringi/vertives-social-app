@@ -4,7 +4,8 @@ CREATE PROCEDURE social.UpdateUser
     @username VARCHAR(50),
     @DOB DATE,
     @city VARCHAR(50),
-    @profilepic_url VARCHAR(MAX)
+    @profilepic_url VARCHAR(MAX),
+    @coverpic_url VARCHAR(MAX)
 AS
 BEGIN
 
@@ -14,6 +15,7 @@ BEGIN
         DOB = @DOB,
         city = @city,
         profilepic_url = @profilepic_url,
+        coverpic_url = @coverpic_url,
         updated_at = SYSDATETIME()
     WHERE user_id = @user_id;
 END
@@ -25,7 +27,8 @@ EXEC social.UpdateUser
     @username = 'johndoe',
     @DOB = '1990-01-01',
     @city = 'New York',
-    @profilepic_url = 'https://example.com/profilepic.jpg';
+    @profilepic_url = 'https://example.com/profilepic.jpg',
+    @coverpic_url = 'https://example.com/profilepic.jpg';
 
 
 SELECT * FROM social.user_profile;

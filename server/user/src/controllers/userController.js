@@ -14,6 +14,7 @@ async function getUserProfile(req, res) {
       name: user.full_name,
       username: user.username,
       profilePicture: user.profilepic_url,
+      coverpic_url: user.coverpic_url,
       city: user.city
     };
 
@@ -26,7 +27,7 @@ async function getUserProfile(req, res) {
 async function updateUserProfile(req, res) {
   try {
     const userId = req.params.userId;
-    const{full_name, username, DOB, city, profilepic_url } = req.body;
+    const{full_name, username, DOB, city, profilepic_url, coverpic_url } = req.body;
 
     const pool = await mssql.connect(config);
 
@@ -37,6 +38,7 @@ async function updateUserProfile(req, res) {
                         .input("DOB", DOB)
                         .input("city", city)
                         .input("profilepic_url",profilepic_url)
+                        .input("coverpic_url", coverpic_url)
                         .execute("social.UpdateUser");
 
   if (result.rowsAffected[0] === 0) {

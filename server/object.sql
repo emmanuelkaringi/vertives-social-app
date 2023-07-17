@@ -22,7 +22,8 @@ CREATE TABLE social.user_profile (
     email VARCHAR(255) NOT NULL UNIQUE,
     DOB DATE NOT NULL,
     city VARCHAR(50),
-    profilepic_url VARCHAR(MAX) NULL,
+    profilepic_url VARCHAR(MAX) DEFAULT 'https://robohash.org/voluptatemsintnulla.png',
+    coverpic_url VARCHAR(MAX) DEFAULT 'https://res.cloudinary.com/ddnpdyaoc/image/upload/v1689599574/jllytsp8ue04fuaumyz3.jpg',
     password VARCHAR(255) NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     updated_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
@@ -36,6 +37,7 @@ CREATE TABLE social.posts (
     content_txt VARCHAR(255),
     media_url VARCHAR(MAX) NULL,
     like_count INT NOT NULL DEFAULT 0,
+    comment_count INT NOT NULL DEFAULT 0,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     is_deleted BIT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES social.user_profile(user_id) ON DELETE CASCADE

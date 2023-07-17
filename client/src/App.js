@@ -7,18 +7,17 @@ import {createBrowserRouter,Route,createRoutesFromElements,RouterProvider} from 
 import { AuthProvider } from "./AuthContext";
 
 const myRouter = createBrowserRouter(
-
   createRoutesFromElements(
     <Route>
-   
-    <Route path="/" element={<HomePage />} />
-    <Route path="/signup" element={<SignUp />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/feed" element={<Feed />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/feed" element={<Feed />} />
     </Route>
-   
   )
 );
+
+myRouter.sessionTimeout = 30 * 60 * 1000; // 30 minutes in milliseconds
 
 function App() {
   return (

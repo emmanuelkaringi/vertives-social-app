@@ -7,7 +7,6 @@ import axios from 'axios'
 const Posts = () => {
 
   const [Posts, setPosts] = useState([]);
-
   useEffect(()=>{
     fetchPosts();
   },[]);

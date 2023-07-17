@@ -1,7 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 import './post.css';
 
 const Post = ({ post }) => {
+  const formattedTime = moment.utc(post.created_at).format("ddd, h:mm A");
   return (
     <div className="Post">
       <div className="detail">
@@ -31,6 +33,9 @@ const Post = ({ post }) => {
         </span>
         <span>
           {post.comment_count} <b>comments</b>
+        </span>
+        <span>
+        {formattedTime}
         </span>
       </div>
     </div>
