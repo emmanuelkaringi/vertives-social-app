@@ -1,29 +1,22 @@
-import './App.css';
-import HomePage from './pages/Homepage/HomePage';
-import SignUp from './pages/Auth/SignUp';
-import Login from './pages/Auth/Login';
-import Feed from './pages/Feed/Feed';
-import {createBrowserRouter,Route,createRoutesFromElements,RouterProvider} from "react-router-dom";
-import { AuthProvider } from "./AuthContext";
-
-const myRouter = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/feed" element={<Feed />} />
-    </Route>
-  )
-);
-
-myRouter.sessionTimeout = 30 * 60 * 1000; // 30 minutes in milliseconds
+import "./App.css";
+import HomePage from "./pages/Homepage/HomePage";
+import SignUp from "./pages/Auth/SignUp";
+import Login from "./pages/Auth/Login";
+import Feed from "./pages/Feed/Feed";
+import { Routes, Route} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.authReducer.authData);
   return (
-    <AuthProvider>
-      <RouterProvider router={myRouter} />
-    </AuthProvider>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={!user ? <HomePage /> : <Feed />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/feed" element={user ? <Feed /> : <SignUp />} />
+      </Routes>
+    </div>
   );
 }
 

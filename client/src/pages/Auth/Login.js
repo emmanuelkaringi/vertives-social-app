@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../../actions/AuthAction";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Auth.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.authReducer.loading);
   const navigate = useNavigate();
-  const { setUser } = useAuth();
   const [username, setusername] = useState("");
-  const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [error, setError] = useState("");
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,33 +24,14 @@ const Login = () => {
     };
 
     console.log(loginData);
+
     try {
-      const response = await axios.post("http://localhost:4000/login", loginData, {
-        withCredentials: true,
-      });
-  
-      // Get the user_id from the server's response
-      const user_id = response.data.user.user_id;
-  
-      // Create the authenticated user object with the fetched user_id
-      const authenticatedUser = { user_id };
-  
-      // Set the authenticated user in the AuthContext
-      setUser(authenticatedUser);
-  
-      // Handle successful login response here
-      navigate("/feed");
+      await dispatch(logIn(loginData));
+      toast.success("Logged in successfully.");
+      navigate("/feed"); // Redirect to the feed page after successful login
     } catch (error) {
-      if (error.response) {
-        // Handle server errors
-        setError(error.response.data.error);
-      } else if (error.request) {
-        // Handle no response from server
-        setError("No response from server. Please try again later.");
-      } else {
-        // Handle other errors
-        setError("An error occurred. Please try again later.");
-      }
+      console.log(error);
+      toast.error("Log In failed, try again later");
     }
   };
 
@@ -81,10 +60,13 @@ const Login = () => {
             name="password"
           />
 
-          <button className="button info-button" type="submit">
-            Login
+          <button
+            className="button info-button"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Login"}
           </button>
-          {error && <p className="error">{error}</p>}
 
           <div className="login_option">
             <span style={{ fontSize: "12px" }}>
@@ -93,6 +75,7 @@ const Login = () => {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

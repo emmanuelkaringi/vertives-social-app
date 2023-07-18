@@ -1,20 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Cover from "../../img/cover.jpg";
 import Profile from "../../img/profile.jpg";
 import "./profilecard.css";
-import { useAuth } from "../../AuthContext";
-import axios from 'axios'
-
 
 const ProfilePage = false;
 
 const ProfileCard = () => {
-  const [user, setUser] = useState(null);
-  const { user_id } = useAuth();
-
-  const getUser = async ()=> {
-    const response = await axios.get('http://localhost:4010/profile')
-  }
+  
   return (
     <div className="profilecard">
       <div className="profileimg">
@@ -34,23 +26,22 @@ const ProfileCard = () => {
             <span>Following</span>
           </div>
 
-            <div className="follow">
-              <span>10</span>
-              <span>Followers </span>
-            </div>
+          <div className="follow">
+            <span>10</span>
+            <span>Followers </span>
+          </div>
 
-            {ProfilePage && (
-              <>
+          {ProfilePage && (
+            <>
               <div className="follow">
                 <span>5</span>
                 <span>Posts</span>
               </div>
-              </>
-            )}
+            </>
+          )}
         </div>
       </div>
       {ProfilePage ? "" : <span>My Profile</span>}
-      
     </div>
   );
 };

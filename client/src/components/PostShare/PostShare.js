@@ -1,22 +1,21 @@
 import React, { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import "./postshare.css";
 import ProfileImg from "../../img/profile.jpg";
-import { useAuth } from "../../AuthContext";
 
 const PostShare = () => {
-  const { user } = useAuth();
-  const user_id = user?.user_id;
+  const {user} = useSelector((state) => state.authReducer.authData);
   const [content_txt, setcontent_txt] = useState("");
   const [media_url, setmedia_url] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const imageRef = useRef();
   const videoRef = useRef();
-  const cloudName=process.env.REACT_APP_CLOUDINARY_NAME
+  const cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
 
   const onImageChange = (e) => {
-    console.log(e.target.files)
+    console.log(e.target.files);
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
       setImage({
@@ -42,7 +41,7 @@ const PostShare = () => {
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData,
+        formData
       );
 
       setmedia_url(response.data.secure_url);
@@ -59,7 +58,7 @@ const PostShare = () => {
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
-        formData,
+        formData
       );
 
       setmedia_url(response.data.secure_url);
@@ -70,42 +69,23 @@ const PostShare = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Check if contentTxt is empty before submitting
-    if (!content_txt) {
-      console.error("Post content is empty");
-      return;
-    }
-    // Check if either image or video is selected
-    if (image) {
-      // Upload the image to Cloudinary
-      uploadImage(image.image);
-    } else if (video) {
-      // Upload the video to Cloudinary
-      uploadVideo(video.video);
-    } else {
-      // If neither image nor video is selected, proceed without media_url
-      createPost();
-    }
-  };
-  
-  const createPost = async () => {
+
     const newPost = {
-      user_id: user_id,
+      user_id: user.user_id,
       content_txt: content_txt,
       media_url: media_url.toString(),
     };
-  
+
     try {
       const response = await axios.post(
         "http://localhost:4020/post/new",
         newPost,
         { withCredentials: true }
       );
-  
+
       console.log(response);
-      console.log(newPost)
-  
+      console.log(newPost);
+
       // Clear form fields and reset state as needed
       setcontent_txt("");
       setImage(null); // Clear the image state
@@ -165,15 +145,12 @@ const PostShare = () => {
               className="fa fa-light fa-xmark"
               onClick={() => setImage(null)}
             ></i>
-            <img src={image.image} alt="" publicid={media_url}/>
+            <img src={image.image} alt="" publicid={media_url} />
           </div>
         )}
         {video && (
           <div className="previewVideo" onClick={() => setVideo(null)}>
-            <i
-              className="fa fa-light fa-xmark"
-              
-            ></i>
+            <i className="fa fa-light fa-xmark"></i>
             <video src={video.video} alt="" />
           </div>
         )}

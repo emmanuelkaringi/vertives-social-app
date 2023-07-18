@@ -38,6 +38,11 @@
     border: 2px solid var(--buttonHV);
   }
 
+  .button:disabled {
+    background: silver;
+    pointer-events: none;
+  }
+
 
   ::-webkit-scrollbar{
     display: none;

@@ -1,5 +1,3 @@
-import Profile from '../img/profile.jpg';
-
 export const Followers = [
     {
         name: "Acharlota Marcel",
