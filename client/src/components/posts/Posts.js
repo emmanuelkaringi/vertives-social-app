@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-//import { postData } from '../../data/postData'
 import Post from '../post/Post'
 import './posts.css'
 import axios from 'axios'

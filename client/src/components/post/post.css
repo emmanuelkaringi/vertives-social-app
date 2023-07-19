@@ -7,6 +7,17 @@
     gap: 1rem;
 }
 
+.profile-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
 .username{
     color: #DD8762;
 }

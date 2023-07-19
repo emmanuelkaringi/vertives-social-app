@@ -1,37 +1,37 @@
 import React from "react";
-import Cover from "../../img/cover.jpg";
-import Profile from "../../img/profile.jpg";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import {Link} from "react-router-dom"
 import "./profilecard.css";
 
-const ProfilePage = false;
 
-const ProfileCard = () => {
+const ProfileCard = ({location}) => {
+  const { user } = useSelector((state) => state.authReducer.authData);
   
   return (
     <div className="profilecard">
       <div className="profileimg">
-        <img src={Cover} alt="" />
-        <img src={Profile} alt="" />
+        <img src={user.coverpic_url} alt="" />
+        <img src={user.profilepic_url} alt="" />
       </div>
 
       <div className="profilename">
-        <span>Immah Stuart</span>
-        <span>@Immah</span>
+        <span>{user.full_name}</span>
+        <span>@{user.username}</span>
       </div>
 
       <div className="followstatus">
         <div>
           <div className="follow">
-            <span>10</span>
+            <span>{user.following_id}</span>
             <span>Following</span>
           </div>
 
           <div className="follow">
-            <span>10</span>
+            <span>{user.follower_id}</span>
             <span>Followers </span>
           </div>
 
-          {ProfilePage && (
+          {location === 'profilePage' && (
             <>
               <div className="follow">
                 <span>5</span>
@@ -41,7 +41,9 @@ const ProfileCard = () => {
           )}
         </div>
       </div>
-      {ProfilePage ? "" : <span>My Profile</span>}
+      {location === 'profilePage' ? "" : <span>
+        <Link style={{textDecoration: "none", color: "inherit"}} to ={ `/profile/${user.user_id}`}>
+        My Profile</Link></span>}
     </div>
   );
 };

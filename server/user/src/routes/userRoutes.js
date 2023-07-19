@@ -4,7 +4,7 @@ const { sessionAuth } = require('../middlewares/sessionMiddleware')
 const newPassMiddleware = require('../middlewares/newPassMiddleware')
 
 userRoutes.use(sessionAuth)
-userRoutes.get('/profile', getUserProfile)
+userRoutes.get('/profile/:userId', getUserProfile)
 userRoutes.put('/profile/:userId', updateUserProfile)
 userRoutes.delete('/profile/:userId', deleteUserProfile)
 userRoutes.put('/profile/password/:userId', newPassMiddleware, updatePassword)

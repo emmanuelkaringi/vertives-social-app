@@ -5,7 +5,6 @@ import ProfileCard from '../../components/profileCard/ProfileCard'
 import PostShare from '../../components/PostShare/PostShare'
 import Posts from '../../components/posts/Posts'
 import RightSide from '../../components/RightSide/RightSide'
-import MiddleSide from '../../components/MiddleSide/MiddleSide'
 import './profile.css'
 
 const Profile = () => {
@@ -15,7 +14,7 @@ const Profile = () => {
 
         <div className='profile-center'>
             <NavBar />
-            <ProfileCard />
+            <ProfileCard location = {"profilePage"}/>
             <PostShare />
             <Posts />
         </div>

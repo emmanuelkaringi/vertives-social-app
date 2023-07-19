@@ -3,7 +3,8 @@ import HomePage from "./pages/Homepage/HomePage";
 import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
 import Feed from "./pages/Feed/Feed";
-import { Routes, Route} from "react-router-dom";
+import Profile from "./pages/Profile/Profile";
+import { Routes, Route, Navigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={!user ? <HomePage /> : <Feed />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/feed" element={user ? <Feed /> : <SignUp />} />
+        <Route path="/feed" element={user ? <Feed /> : <Navigate to ='/login'/>} />
+        <Route path='/profile/:id' element={user? <Profile /> : <Navigate to ='/login'/>} />
       </Routes>
     </div>
   );
