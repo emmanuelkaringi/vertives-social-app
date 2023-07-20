@@ -1,9 +1,10 @@
 const  userRoutes = require('express').Router();
-const { getUserProfile, updateUserProfile, deleteUserProfile, updatePassword } = require('../controllers/userController')
+const { getAllProfiles, getUserProfile, updateUserProfile, deleteUserProfile, updatePassword } = require('../controllers/userController')
 const { sessionAuth } = require('../middlewares/sessionMiddleware')
 const newPassMiddleware = require('../middlewares/newPassMiddleware')
 
-userRoutes.use(sessionAuth)
+//userRoutes.use(sessionAuth)
+userRoutes.get('/profile/all', getAllProfiles)
 userRoutes.get('/profile/:userId', getUserProfile)
 userRoutes.put('/profile/:userId', updateUserProfile)
 userRoutes.delete('/profile/:userId', deleteUserProfile)

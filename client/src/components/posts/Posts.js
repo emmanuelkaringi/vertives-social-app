@@ -17,7 +17,7 @@ const Posts = () => {
       });
       const results = response.data.data;
       setPosts(results);
-      console.log(results)
+      //console.log(results)
     }catch(error) {
       console.error('Error fetching Posts:', error);
     }

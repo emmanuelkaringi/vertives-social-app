@@ -6,7 +6,7 @@ const { sessionAuth } = require('../middlewares/sessionMiddleware')
 friendshipRoutes.use(sessionAuth)
 friendshipRoutes.get('/followers/:userId', getFollowers)
 friendshipRoutes.get('/following/:userId', getFollowing)
-friendshipRoutes.post('/follow', followUser);
-friendshipRoutes.post('/unfollow', unFollowUser);
+friendshipRoutes.post('/follow/:userId', followUser);
+friendshipRoutes.post('/unfollow/:userId', unFollowUser);
 
 module.exports = friendshipRoutes;
