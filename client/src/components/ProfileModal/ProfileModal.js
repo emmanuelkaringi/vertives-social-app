@@ -131,10 +131,6 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             Profile Image:
             <input type="file" name="profilepic_url" onChange={onImageChange} />
           </div>
-          <div>
-            Cover Image:
-            <input type="file" name="coverpic_url" onChange={onImageChange} />
-          </div>
 
           <div>
             <button className="button info-button" onClick={handleSubmit}>

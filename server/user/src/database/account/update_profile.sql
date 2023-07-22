@@ -5,7 +5,6 @@ CREATE PROCEDURE social.UpdateUser
     @DOB DATE,
     @city VARCHAR(50),
     @profilepic_url VARCHAR(MAX),
-    @coverpic_url VARCHAR(MAX)
 AS
 BEGIN
 
@@ -15,7 +14,6 @@ BEGIN
         DOB = @DOB,
         city = @city,
         profilepic_url = @profilepic_url,
-        coverpic_url = @coverpic_url,
         updated_at = SYSDATETIME()
     WHERE user_id = @user_id;
 END

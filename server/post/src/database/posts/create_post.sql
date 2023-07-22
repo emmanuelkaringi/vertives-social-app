@@ -1,4 +1,4 @@
-CREATE PROCEDURE social.CreatePost
+CREATE OR ALTER PROCEDURE social.CreatePost
     @user_id UNIQUEIDENTIFIER,
     @content_txt TEXT,
     @media_url TEXT = NULL

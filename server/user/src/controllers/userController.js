@@ -34,7 +34,6 @@ async function getUserProfile(req, res) {
       name: user.full_name,
       username: user.username,
       profilePicture: user.profilepic_url,
-      coverpic_url: user.coverpic_url,
       city: user.city,
     };
 
@@ -60,7 +59,6 @@ async function updateUserProfile(req, res) {
       .input("DOB", DOB)
       .input("city", city)
       .input("profilepic_url", profilepic_url)
-      .input("coverpic_url", coverpic_url)
       .execute("social.UpdateUser");
 
     if (result.rowsAffected[0] === 0) {

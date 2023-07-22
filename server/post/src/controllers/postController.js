@@ -10,8 +10,6 @@ async function createPost(req, res) {
                 .input("media_url", media_url)
                 .execute('social.CreatePost');
 
-            console.log(results);
-
             res.json({
                 success: true,
                 message: "Post created successfully",
@@ -53,6 +51,34 @@ async function getAllPosts(req, res) {
             message: "Failed to get posts",
             error: error.message
         }); 
+    }
+}
+
+async function getFollowingUserPosts(req, res) {
+    try {
+        let userId = req.body.user_id;  // Assuming the user ID is in the "user_id" property of the request body
+        const pool = req.pool;
+
+        if (pool.connected) {
+            let results = await pool.request()
+                .input("user_id", userId)
+                .execute('social.FollowingUser');
+
+            res.json({
+                success: true,
+                message: "Posts retrieved successfully",
+                data: results.recordset  // Use "recordset" instead of "recordsets" for a single result set
+            });
+        } else {
+            throw new Error("Internal server error");
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch posts",
+            error: error.message
+        });
     }
 }
 
@@ -224,4 +250,4 @@ async function deletePost(req, res) {
 }
 
 
-module.exports= {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unlikePost, deletePost};
+module.exports= {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unlikePost, deletePost, getFollowingUserPosts};
