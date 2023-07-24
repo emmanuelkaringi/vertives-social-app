@@ -10,25 +10,21 @@ const Login = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
   const navigate = useNavigate();
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const loginData = {
-      // If the input contains an "@" symbol, it's considered an email; otherwise, it's a username.
-      email: /@/.test(username) ? username : "",
-      username: /@/.test(username) ? "" : username,
+      username,
       password,
     };
-
-    console.log(loginData);
 
     try {
       await dispatch(logIn(loginData));
       toast.success("Logged in successfully.");
-      navigate("/feed"); // Redirect to the feed page after successful login
+      navigate("/feed");
     } catch (error) {
       console.log(error);
       toast.error("Log In failed, try again later");
@@ -41,13 +37,13 @@ const Login = () => {
         <h3>Log In</h3>
 
         <div>
-          <label>Email or Username</label>
+          <label>Username</label>
           <input
             type="text"
-            placeholder="Email or Username"
+            placeholder="Username"
             className="info-input"
             value={username}
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             name="username"
           />
           <label>Password</label>
@@ -56,7 +52,7 @@ const Login = () => {
             placeholder="Enter a Password"
             className="info-input"
             value={password}
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             name="password"
           />
 

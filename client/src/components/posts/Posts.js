@@ -27,6 +27,7 @@ const Posts = () => {
         });
       }
       setPosts(response.data.data); // Check if response.data.data is the correct array
+      // console.log(response)
     } catch (error) {
       console.error('Error fetching Posts:', error);
     }
@@ -34,6 +35,8 @@ const Posts = () => {
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
+
+  
 
   return (
     <div className='Posts'>

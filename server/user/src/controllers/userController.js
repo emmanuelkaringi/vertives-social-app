@@ -25,16 +25,17 @@ async function getAllProfiles(req, res) {
 
 async function getUserProfile(req, res) {
   try {
-    const { username, email } = req.body;
+    const userId = req.params.userId; // Get the user_id from the request parameters
 
-    const user = await getUser(username, email);
+    const user = await getUser(userId);
 
     const userProfile = {
       user_id: user.user_id,
-      name: user.full_name,
+      full_name: user.full_name,
       username: user.username,
-      profilePicture: user.profilepic_url,
+      profilepic_url: user.profilepic_url,
       city: user.city,
+      DOB: user.DOB,
     };
 
     res.json(userProfile);

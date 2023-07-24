@@ -17,12 +17,21 @@ const InfoCard = () => {
 
   useEffect(() => {
     const fetchProfileUser = async () => {
-      if (profileUserId === user.user_id) {
-        setProfileUser(user);
+      // If there is no authenticated user or the profileUserId is different from the authenticated user,
+      // fetch the profileUser using the profileUserId from the URL parameter
+      if (!user || profileUserId !== user.user_id) {
+        try {
+          // console.log("fetching");
+          const profileUser = await UserApi.getUser(profileUserId);
+          setProfileUser(profileUser.data);
+          // console.log(profileUser);
+        } catch (error) {
+          console.error("Error fetching profile user:", error);
+        }
       } else {
-        console.log("fetching")
-        const profileUser = await UserApi.getUser(profileUserId);
-        setProfileUser(profileUser);
+        // If the profileUserId is the same as the authenticated user's ID, use the user object from the Redux store
+        setProfileUser(user);
+        // console.log(user);
       }
     };
     fetchProfileUser();
@@ -31,17 +40,18 @@ const InfoCard = () => {
   const handleLogOut = () => {
     dispatch(logOut());
   };
+
   return (
     <div className="InfoCard">
       <div className="info-head">
         <h4>User Info</h4>
-        {user.user_id === profileUserId ? (
+        {user && user.user_id === profileUserId ? (
           <span>
             <i className="fa fa-pen" onClick={() => setModalOpened(true)} />{" "}
             <ProfileModal
               modalOpened={modalOpened}
               setModalOpened={setModalOpened}
-              data = {user}
+              data={user}
             />
           </span>
         ) : (
@@ -49,19 +59,40 @@ const InfoCard = () => {
         )}
       </div>
 
-      <div className="info">
-        <span>
-          <b>DOB: </b>
-        </span>
-        <span>{new Date(profileUser.DOB).toLocaleDateString()}</span>
-      </div>
+      {/* Conditionally render the user's DOB and City information based on the viewed profile */}
+      {profileUserId === user?.user_id ? (
+        <>
+          <div className="info">
+            <span>
+              <b>DOB: </b>
+            </span>
+            <span>{new Date(user.DOB).toLocaleDateString()}</span>
+          </div>
 
-      <div className="info">
-        <span>
-          <b>City: </b>
-        </span>
-        <span>{profileUser.city}</span>
-      </div>
+          <div className="info">
+            <span>
+              <b>City: </b>
+            </span>
+            <span>{user.city}</span>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="info">
+            <span>
+              <b>DOB: </b>
+            </span>
+            <span>{new Date(profileUser.DOB).toLocaleDateString()}</span>
+          </div>
+
+          <div className="info">
+            <span>
+              <b>City: </b>
+            </span>
+            <span>{profileUser.city}</span>
+          </div>
+        </>
+      )}
 
       <button className="button logout" onClick={handleLogOut}>
         Logout

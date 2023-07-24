@@ -2,26 +2,28 @@
 const config = require("../config/vertivesConfig");
 const mssql = require("mssql");
 
-async function getUser(username, email) {
-  let sql = await mssql.connect(config);
-  if (sql.connected) {
-    let userCheck = await sql
-      .request()
-      .input("username", username)
-      .input("email", email)
-      .query(
-        "SELECT * FROM social.user_profile WHERE username = @username OR email = @email"
-      );
+async function getUser(userId) {
+  try {
+    const pool = await mssql.connect(config);
+    if (pool.connected) {
+      const userCheck = await pool
+        .request()
+        .input("user_id", mssql.UniqueIdentifier, userId)
+        .execute("social.GetUserByID");
 
-    if (userCheck.recordset.length === 0) {
-      // User not found
-      throw new Error("User not found");
+      if (userCheck.recordset.length === 0) {
+        // User not found
+        throw new Error("User not found");
+      }
+
+      const user = userCheck.recordset[0];
+      console.log(user);
+
+      return user;
     }
-
-    let user = userCheck.recordset[0];
-    console.log(user);
-
-    return user;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    throw error;
   }
 }
 

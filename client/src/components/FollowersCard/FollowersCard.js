@@ -14,7 +14,7 @@ function FollowersCard() {
     const fetchPersons = async () => {
       const response = await getAllUsers();
       setPersons(response.data.data)
-      console.log(response.data.data)
+      // console.log(response.data.data)
     };
     fetchPersons();
   },[]);

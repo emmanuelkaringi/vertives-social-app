@@ -1,0 +1,36 @@
+.Comment{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--cardColor);
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.profile-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+.username{
+    color: #DD8762;
+}
+
+
+.commentReact,
+.reactDetails{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1.5rem;
+    color: var(--buttonHV);
+}
+
+.fa:hover{
+    cursor: pointer;
+}

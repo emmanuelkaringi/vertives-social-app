@@ -2,7 +2,6 @@ CREATE PROCEDURE social.GetUserByID
     @user_id UNIQUEIDENTIFIER
 AS
 BEGIN
-    
     SELECT *
     FROM social.user_profile
     WHERE user_id = @user_id;
