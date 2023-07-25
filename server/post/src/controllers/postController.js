@@ -150,18 +150,17 @@ async function likePost(req, res) {
                 .input("post_id", post_id)
                 .execute('social.LikePost');
 
-                if (results.rowsAffected[0] > 0) {
-                    res.json({
-                        success: true,
-                        message: "Post liked successfully",
-                    });
-            } else if (results.rowsAffected[0] < 0) {
+            // Check the output of the procedure to determine success or error
+            if (results.output.message === "Post liked successfully") {
                 res.json({
-                    success: false,
-                    message: "You have already liked this post",
+                    success: true,
+                    message: results.output.message,
                 });
             } else {
-                throw new Error("Unexpected result from stored procedure");
+                res.json({
+                    success: false,
+                    message: results.output.message,
+                });
             }
         } else {
             throw new Error("Internal server error");

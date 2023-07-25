@@ -10,6 +10,8 @@ import {
     try {
         const serializedStore = JSON.stringify(store);
         window.localStorage.setItem('store', serializedStore);
+        console.log("Persisted State:", persistedState);
+
     } catch(e) {
         console.log(e);
     }

@@ -12,8 +12,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={!user ? <HomePage /> : <Feed />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={!user ? <SignUp /> : <Feed />} />
         <Route path="/login" element={<Login />} />
         <Route path="/feed" element={user ? <Feed /> : <Navigate to ='/login'/>} />
         <Route path='/profile/:id' element={user? <Profile /> : <Navigate to ='/login'/>} />

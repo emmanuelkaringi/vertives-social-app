@@ -32,45 +32,55 @@ const Login = () => {
   };
 
   return (
-    <div className="Auth">
-      <form className="info-form auth-form" onSubmit={handleSubmit}>
-        <h3>Log In</h3>
+    <div className="login">
+      <div className="loginWrapper">
+        <div className="loginLeft">
+          <h3 className="loginLogo">Vertives</h3>
+          <span className="loginDesc">Connect with Authenticity</span>
+        </div>
+        <div className="loginRight">
+          <div className="loginBox">
+            <form onSubmit={handleSubmit}>
+              <h3>Login</h3>
+              <input
+                type="text"
+                placeholder="Username"
+                className="info-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+              />
+              <input
+                type="password"
+                placeholder="Enter a Password"
+                className="info-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+              />
 
-        <div>
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder="Username"
-            className="info-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            name="username"
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter a Password"
-            className="info-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-          />
+              <button
+                className="button info-button"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Login"}
+              </button>
 
-          <button
-            className="button info-button"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Login"}
-          </button>
-
-          <div className="login_option">
-            <span style={{ fontSize: "12px" }}>
-              <Link to="/signup">Don't have an account? Signup</Link>
-            </span>
+              <div className="login_option">
+                <span style={{ fontSize: "12px" }}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to="/"
+                  >
+                    Don't have an account? Signup
+                  </Link>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
       <ToastContainer />
     </div>
   );

@@ -19,22 +19,8 @@ const Comment = ({ comment }) => {
       </div>
       <div className="Comment-content">{comment.comment_txt}</div>
       {isCommentByLoggedInUser && <p>You are the author of this comment.</p>}
-      <div className="CommentReact">
-        <span>
-          {comment.liked ? (
-            <i className="fa fa-thumbs-up" />
-          ) : (
-            <i className="fa fa-thumbs-down" />
-          )}
-        </span>
-        <span>
-          <i className="fa fa-comment" />
-        </span>
-      </div>
+      
       <div className="reactDetails">
-        <span>
-          {comment.like_count} <b>likes</b>
-        </span>
         <span>{formattedTime}</span>
       </div>
     </div>

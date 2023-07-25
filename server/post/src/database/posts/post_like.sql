@@ -3,7 +3,6 @@ CREATE OR ALTER PROCEDURE social.LikePost
     @post_id UNIQUEIDENTIFIER
 AS
 BEGIN
-
     -- Check if the user has already liked the post
     IF EXISTS (
         SELECT 1

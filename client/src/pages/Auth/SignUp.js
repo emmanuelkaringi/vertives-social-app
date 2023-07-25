@@ -53,101 +53,106 @@ const SignUp = () => {
   };
 
   return (
-    <div className="Auth">
-      <form className="info-form auth-form" onSubmit={handleSubmit}>
-        <h3>Sign up</h3>
+    <div className="signup">
+      <div className="signupWrapper">
+        <div className="signupLeft">
+          <h3 className="signupLogo">Vertives</h3>
+          <span className="signupDesc">Connect with Authenticity</span>
+        </div>
+        <div className="signupRight">
+          <div className="signupBox">
+            <form onSubmit={handleSubmit}>
+              <h3>Sign up</h3>
+              <input
+                required
+                type="text"
+                placeholder="Full Name"
+                className="info-input"
+                value={full_name}
+                onChange={(e) => setfull_name(e.target.value)}
+                name="fullname"
+              />
 
-        <div>
-          <label>Full Name</label>
-          <input
-            required
-            type="text"
-            placeholder="Full Name"
-            className="info-input"
-            value={full_name}
-            onChange={(e) => setfull_name(e.target.value)}
-            name="fullname"
-          />
+              <input
+                required
+                type="text"
+                placeholder="Username"
+                className="info-input"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
+                name="username"
+              />
 
-          <label>Username</label>
-          <input
-            required
-            type="text"
-            placeholder="Username"
-            className="info-input"
-            value={username}
-            onChange={(e) => setusername(e.target.value)}
-            name="username"
-          />
+              <input
+                required
+                type="email"
+                placeholder="Email"
+                className="info-input"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                name="email"
+              />
 
-          <label>Email</label>
-          <input
-            required
-            type="email"
-            placeholder="Email"
-            className="info-input"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-            name="email"
-          />
+              <input
+                required
+                type="date"
+                placeholder="Date of Birth"
+                className="info-input"
+                value={DOB}
+                onChange={(e) => setDOB(e.target.value)}
+                name="DOB"
+              />
 
-          <label>Date of Birth</label>
-          <input
-            required
-            type="date"
-            placeholder="Date of Birth"
-            className="info-input"
-            value={DOB}
-            onChange={(e) => setDOB(e.target.value)}
-            name="DOB"
-          />
+              <input
+                required
+                type="text"
+                placeholder="City"
+                className="info-input"
+                value={city}
+                onChange={(e) => setcity(e.target.value)}
+                name="city"
+              />
 
-          <label>City</label>
-          <input
-            required
-            type="text"
-            placeholder="City"
-            className="info-input"
-            value={city}
-            onChange={(e) => setcity(e.target.value)}
-            name="city"
-          />
-          <div>
-            <label>Password</label>
-            <input
-              required
-              type="password"
-              placeholder="Enter a Password"
-              className="info-input"
-              value={password}
-              onChange={(e) => setpassword(e.target.value)}
-              name="password"
-            />
+              <input
+                required
+                type="password"
+                placeholder="Enter a Password"
+                className="info-input"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                name="password"
+              />
 
-            <label>Confirm Password</label>
-            <input
-              required
-              type="password"
-              placeholder="Confirm Your Password"
-              className="info-input"
-              value={confirm_password}
-              onChange={(e) => setconfirm_password(e.target.value)}
-              name="c_password"
-            />
-          </div>
-          {passwordError && <p className="error">{passwordError}</p>}
+              <input
+                required
+                type="password"
+                placeholder="Confirm Your Password"
+                className="info-input"
+                value={confirm_password}
+                onChange={(e) => setconfirm_password(e.target.value)}
+                name="c_password"
+              />
 
-          <button className="button info-button" type="submit">
-            Signup
-          </button>
+              {passwordError && <p className="error">{passwordError}</p>}
 
-          <div className="login_option">
-            <span>
-              <Link to="/login">Already have an account? Login</Link>
-            </span>
+              <button className="button info-button" type="submit">
+                Signup{" "}
+              </button>
+
+              <div className="login_option">
+                <span>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to="/login"
+                  >
+                    Already have an account? Login
+                  </Link>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
       <ToastContainer />
     </div>
   );
