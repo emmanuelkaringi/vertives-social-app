@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
 import "./ProfileModal.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { updateUser } from "../../actions/UserAction";
+import { deleteUser } from "../../api/UserRequest";
 import axios from "axios";
 
 const cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
@@ -13,9 +14,9 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
   const { password, ...other } = data;
   const [formData, setFormData] = useState(other);
   const [profileImage, setProfileImage] = useState(null);
-  const [coverImage, setCoverImage] = useState(null);
   const dispatch = useDispatch();
   const param = useParams();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.authReducer.authData);
 
   const handleChange = (e) => {
@@ -25,9 +26,9 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
-      event.target.name === "profilepic_url"
-        ? setProfileImage(img)
-        : setCoverImage(img);
+      if (event.target.name === "profilepic_url") {
+        setProfileImage(img);
+      }
     }
   };
 
@@ -64,17 +65,23 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
       }
     }
 
-    // Handle cover image upload to Cloudinary
-    if (coverImage) {
-      const coverImageUrl = await handleImageUpload(coverImage);
-      if (coverImageUrl) {
-        updatedData.coverpic_url = coverImageUrl;
-      }
-    }
-
     // Dispatch the updateUser action with the updated data
     dispatch(updateUser(param.id, updatedData));
     setModalOpened(false);
+  };
+
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete your account?");
+    if (confirmDelete) {
+      try {
+        // Call the deleteUser function to delete the account
+        await deleteUser(param.id);
+        // Navigate to the login page after successful deletion
+        navigate("/login");
+      } catch (error) {
+        console.error("Error deleting account:", error);
+      }
+    }
   };
 
   return (
@@ -136,7 +143,9 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             <button className="button info-button" onClick={handleSubmit}>
               Update Details
             </button>
-            <button className="button info-button">Delete Account</button>
+            <button className="button info-button dl-button" onClick={handleDeleteAccount}>
+              Delete Account
+            </button>
           </div>
         </form>
       </Modal>

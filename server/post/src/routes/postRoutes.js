@@ -3,7 +3,7 @@ const {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unli
 const { sessionAuth } = require('../middlewares/sessionMiddleware')
 const newPostMiddleware = require('../middlewares/newPostMiddleware')
 
-//postRoutes.use(sessionAuth)
+postRoutes.use(sessionAuth)
 postRoutes.post('/post/new', newPostMiddleware, createPost)
 postRoutes.get('/post', getSinglePost)
 postRoutes.post('/post/like', likePost)

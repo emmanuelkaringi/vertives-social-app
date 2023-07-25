@@ -124,10 +124,36 @@ async function updatePassword(req, res) {
   }
 }
 
+async function searchUsers(req, res) {
+  try {
+    const { search_query } = req.params; // Get the search query from the request query parameters
+
+    const pool = await mssql.connect(config);
+
+    if (pool.connected) {
+      const request = pool.request();
+      request.input("search_query", mssql.NVarChar(100), search_query);
+      const result = await request.execute("social.SearchUsers");
+
+      res.json({
+        success: true,
+        message: "Search results retrieved successfully",
+        data: result.recordset,
+      });
+    } else {
+      throw new Error("Internal server error");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   getAllProfiles,
   getUserProfile,
   updateUserProfile,
   deleteUserProfile,
   updatePassword,
+  searchUsers
 };

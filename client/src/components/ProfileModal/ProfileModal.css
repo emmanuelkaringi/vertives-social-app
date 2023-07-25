@@ -22,6 +22,10 @@
 }
 
 .info-button{
-    width: 6rem;
+    width: 8rem;
     height: 2rem;
+}
+
+.dl-button{
+    background-color: red;
 }

@@ -29,3 +29,7 @@ export const getFollowing = (id, data) => API.post(`/following/${id}`, data,{
 export const getFollowers = (id, data) => API.post(`/followers/${id}`, data,{
     withCredentials: true,
 })
+
+export const deleteUser = (id) => API.delete(`/profile/${id}`,{
+    withCredentials: true,
+})

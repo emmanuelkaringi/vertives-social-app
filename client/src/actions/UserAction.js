@@ -1,16 +1,31 @@
 import * as UserApi from "../api/UserRequest.js"
 
-export const updateUser = (id, formData)=> async(dispatch) =>{
-    dispatch({type: "UPDATING_START"})
+export const updateUser = (id, formData) => async (dispatch) => {
+    dispatch({ type: "UPDATING_START" });
     try {
-        const {data} = await UserApi.updateUser(id, formData);
-        console.log("Action Received : ",data)
-        dispatch({type: "UPDATING_SUCCESS", data: data})
+      const { data } = await UserApi.updateUser(id, formData);
+      console.log("Action Received: ", data);
+      dispatch({ type: "UPDATING_SUCCESS", data: data });
     } catch (error) {
-        dispatch({type: "UPDATING_FAIL"})
-        
+      dispatch({ type: "UPDATING_FAIL" });
     }
-}
+  };
+  
+  // Add a new action to delete the user account
+  export const deleteUserAccount = (id, callback) => async (dispatch) => {
+    try {
+      // Call the backend API to delete the user account
+      await UserApi.deleteUser(id);
+  
+      // Invoke the callback function to handle redirection
+      callback();
+  
+      // You can also dispatch a success action here if needed
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      // Handle any errors here if needed
+    }
+  };
 
 export const followUser = (data) => async (dispatch) => {
     dispatch({type: "FOLLOW_USER"})
