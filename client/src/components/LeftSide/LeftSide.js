@@ -6,7 +6,7 @@ const LeftSide = () => {
   return (
     <div className='profile'>
        <span>Vertives</span>
-        <ProfileCard />
+        <ProfileCard location="/feed"/>
         <button className='button s-button'>Share</button>
     </div>
   )

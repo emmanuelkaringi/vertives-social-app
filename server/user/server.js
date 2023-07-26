@@ -2,10 +2,16 @@ const express = require('express');
 require('dotenv').config();
 const userRoutes = require('./src/routes/userRoutes');
 const friendshipRoutes = require('./src/routes/friendshipRoutes');
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+  origin:'http://localhost:3000', 
+  credentials:true,       
+  optionSuccessStatus:200
+}))
 
 async function startUserApi() {
   try {

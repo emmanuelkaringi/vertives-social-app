@@ -48,7 +48,8 @@ app.use(
     cookie: {
       httpOnly: false,
       secure: false, //For production, set to true (HTTPS request)
-      maxAge: oneDay,
+      //maxAge: oneDay,
+      maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
       domain:'localhost'
     },
   })

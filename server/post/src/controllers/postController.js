@@ -10,12 +10,10 @@ async function createPost(req, res) {
                 .input("media_url", media_url)
                 .execute('social.CreatePost');
 
-            console.log(results);
-
             res.json({
                 success: true,
                 message: "Post created successfully",
-                data: results.recordsets[0]
+                data: results.recordset
             });
         } else {
             throw new Error("Internal server error");
@@ -41,7 +39,7 @@ async function getAllPosts(req, res) {
             res.json({
                 success: true,
                 message: "Posts retrieved successfully",
-                data: result.recordsets
+                data: result.recordset
             });
         }  else {
             throw new Error("Internal server error");
@@ -53,6 +51,34 @@ async function getAllPosts(req, res) {
             message: "Failed to get posts",
             error: error.message
         }); 
+    }
+}
+
+async function getFollowingUserPosts(req, res) {
+    try {
+        let userId = req.body.user_id;  // Assuming the user ID is in the "user_id" property of the request body
+        const pool = req.pool;
+
+        if (pool.connected) {
+            let results = await pool.request()
+                .input("user_id", userId)
+                .execute('social.FollowingUser');
+
+            res.json({
+                success: true,
+                message: "Posts retrieved successfully",
+                data: results.recordset  // Use "recordset" instead of "recordsets" for a single result set
+            });
+        } else {
+            throw new Error("Internal server error");
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch posts",
+            error: error.message
+        });
     }
 }
 
@@ -69,7 +95,7 @@ async function getFollowingPosts(req, res) {
             res.json({
                 success: true,
                 message: "Posts retrieved successfully",
-                data: results.recordsets  // Use "recordset" instead of "recordsets" for a single result set
+                data: results.recordset  // Use "recordset" instead of "recordsets" for a single result set
             });
         } else {
             throw new Error("Internal server error");
@@ -124,18 +150,17 @@ async function likePost(req, res) {
                 .input("post_id", post_id)
                 .execute('social.LikePost');
 
-                if (results.rowsAffected[0] > 0) {
-                    res.json({
-                        success: true,
-                        message: "Post liked successfully",
-                    });
-            } else if (results.rowsAffected[0] < 0) {
+            // Check the output of the procedure to determine success or error
+            if (results.output.message === "Post liked successfully") {
                 res.json({
-                    success: false,
-                    message: "You have already liked this post",
+                    success: true,
+                    message: results.output.message,
                 });
             } else {
-                throw new Error("Unexpected result from stored procedure");
+                res.json({
+                    success: false,
+                    message: results.output.message,
+                });
             }
         } else {
             throw new Error("Internal server error");
@@ -224,4 +249,4 @@ async function deletePost(req, res) {
 }
 
 
-module.exports= {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unlikePost, deletePost};
+module.exports= {createPost, likePost, getAllPosts, getFollowingPosts, getSinglePost, unlikePost, deletePost, getFollowingUserPosts};

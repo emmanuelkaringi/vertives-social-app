@@ -5,7 +5,7 @@ const { sessionAuth } = require('../middlewares/sessionMiddleware')
 
 commentRoutes.use(sessionAuth)
 commentRoutes.post('/post/comment', createComment)
-commentRoutes.get('/post/comments', getComments)
+commentRoutes.get('/post/comments/:post_id', getComments)
 commentRoutes.post('/post/comments/like', likeComment)
 commentRoutes.post('/post/comments/unlike', unlikeComment)
 commentRoutes.delete('/post/comments', deleteComment)

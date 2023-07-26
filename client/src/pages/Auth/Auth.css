@@ -1,21 +1,61 @@
-.Auth{
-    width: 330px;
-    padding: 0.5rem 1rem;
-    margin: 50px auto;
-    background-color: var(--cardColor);
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
+/* SignUp Page */
 
-h3{
+.signup {
+    width: 100vw;
+    height: 120vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signupWrapper {
+    width: 70%;
+    height: 70%;
+    display: flex;
+  }
+  
+  .signupLeft,
+  .signupRight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .signupLogo {
+    font-size: 60px;
+    font-weight: 800;
+    color: #71A894;
+    margin-bottom: 10px;
+  }
+  
+  .signupDesc {
+    font-size: 24px;
+  }
+  
+  .signupBox{
+      height: 400px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+
+  
+  h3{
     font-size: 2rem;
     color: #303031;
     margin-bottom: 1rem;
-}
-
-
-.info-input{
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 20px; /* This sets the space between the input elements */
+  }
+  
+  .info-input{
     width: 80%;
     outline: none;
     border: 1px solid #fff;
@@ -23,9 +63,12 @@ h3{
     margin-bottom: 10px;
     border-radius: 20px;
     background: var(--inputColor);
-}
-
-.info-input:hover{
+  }
+  .single{
+    width: 90%;
+  }
+  
+  .info-input:hover{
     border: 1px solid rgb(192, 192, 192);
 }
 
@@ -49,57 +92,48 @@ h3{
     align-self: center;
 
 }
-/* .Auth{
+
+/* Login Page */
+
+.login {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90vh;
-}
-
-.Auth > div {
+  }
+  
+  .loginWrapper {
+    width: 70%;
+    height: 70%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-form{
+  }
+  
+  .loginLeft,
+  .loginRight {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.info-input{
-    border: none;
-    outline: none;
-    background-color: var(--inputColor);
-    border-radius: 8px;
-    padding: 20px;
-    flex: 1;
-}
-
-.info-input > div{
-    display: flex;
-    gap: 1rem;
-    height: 2rem;
-    width: 90%;
-}
-
-.info-button{
-    width: 6rem;
-    height: 2rem;
-    align-self: flex-end;
-}
-
-.auth-form{
-    background-color: var(--cardColor);
-    border-radius: 1rem;
-    padding: 1rem;
-}
-
-.auth-form > div {
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-} */
+  }
+  
+  .loginLogo {
+    font-size: 60px;
+    font-weight: 800;
+    color: #71A894;
+    margin-bottom: 10px;
+  }
+  
+  .loginDesc {
+    font-size: 24px;
+  }
+  
+  .loginBox{
+      height: 290px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }

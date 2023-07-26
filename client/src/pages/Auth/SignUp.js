@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../actions/AuthAction";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Auth.css";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const [full_name, setfull_name] = useState("");
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
@@ -12,7 +16,6 @@ const SignUp = () => {
   const [password, setpassword] = useState("");
   const [confirm_password, setconfirm_password] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [signupStatus, setSignupStatus] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,137 +38,128 @@ const SignUp = () => {
     console.log(registrationData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/register",
-        registrationData
+      await dispatch(signUp(registrationData));
+      toast.success(
+        "Account created successfully, check your email for the welcome message"
       );
-      setSignupStatus("success");
-      console.log(response);
+      // Navigate to login page
       navigate("/login");
     } catch (error) {
-      if (error.response) {
-        console.error("Server Error:", error.response.data);
-        // Check if error is related to password
-        if (error.response.data.message === "Invalid password") {
-          setPasswordError(
-            "Invalid password. Please choose a stronger password."
-          );
-        } else {
-          setPasswordError("Signup failed. Please try again later.");
-        }
-        setSignupStatus("error");
-      } else if (error.request) {
-        console.error("No response from server:", error.request);
-        setPasswordError("No response from server. Please try again later.");
-        setSignupStatus("error");
-      } else {
-        console.error("Error:", error.message);
-        setPasswordError("An error occurred. Please try again later.");
-        setSignupStatus("error");
-      }
+      console.log(error);
+      toast.error("Registration failed, try again later");
+      // Do not navigate to login page
+      return false;
     }
   };
 
   return (
-    <div className="Auth">
-      <form className="info-form auth-form" onSubmit={handleSubmit}>
-        <h3>Sign up</h3>
+    <div className="signup">
+      <div className="signupWrapper">
+        <div className="signupLeft">
+          <h3 className="signupLogo">Vertives</h3>
+          <span className="signupDesc">Connect with Authenticity</span>
+        </div>
+        <div className="signupRight">
+          <div className="signupBox">
+            <form onSubmit={handleSubmit}>
+              <h3>Sign up</h3>
+              <div className="input-row">
+                <input
+                  required
+                  type="text"
+                  placeholder="Full Name"
+                  className="info-input"
+                  value={full_name}
+                  onChange={(e) => setfull_name(e.target.value)}
+                  name="fullname"
+                />
 
-        <div>
-          <label>Full Name</label>
-          <input
-          required
-            type="text"
-            placeholder="Full Name"
-            className="info-input"
-            value={full_name}
-            onChange={(e) => setfull_name(e.target.value)}
-            name="fullname"
-          />
+                <input
+                  required
+                  type="text"
+                  placeholder="Username"
+                  className="info-input"
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
+                  name="username"
+                />
+              </div>
 
-          <label>Username</label>
-          <input
-          required
-            type="text"
-            placeholder="Username"
-            className="info-input"
-            value={username}
-            onChange={(e) => setusername(e.target.value)}
-            name="username"
-          />
+              <input
+                required
+                type="email"
+                placeholder="Email"
+                className="info-input single"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                name="email"
+              />
 
-          <label>Email</label>
-          <input
-          required
-            type="email"
-            placeholder="Email"
-            className="info-input"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-            name="email"
-          />
+              <div className="input-row">
+                <input
+                  required
+                  type="date"
+                  placeholder="Date of Birth"
+                  className="info-input"
+                  value={DOB}
+                  onChange={(e) => setDOB(e.target.value)}
+                  name="DOB"
+                />
 
-          <label>Date of Birth</label>
-          <input
-          required
-            type="date"
-            placeholder="Date of Birth"
-            className="info-input"
-            value={DOB}
-            onChange={(e) => setDOB(e.target.value)}
-            name="DOB"
-          />
+                <input
+                  required
+                  type="text"
+                  placeholder="City"
+                  className="info-input"
+                  value={city}
+                  onChange={(e) => setcity(e.target.value)}
+                  name="city"
+                />
+              </div>
 
-          <label>City</label>
-          <input
-          required
-            type="text"
-            placeholder="City"
-            className="info-input"
-            value={city}
-            onChange={(e) => setcity(e.target.value)}
-            name="city"
-          />
-          <div>
-            <label>Password</label>
-            <input
-            required
-              type="password"
-              placeholder="Enter a Password"
-              className="info-input"
-              value={password}
-              onChange={(e) => setpassword(e.target.value)}
-              name="password"
-            />
+              <div className="input-row">
+                <input
+                  required
+                  type="password"
+                  placeholder="Enter a Password"
+                  className="info-input"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  name="password"
+                />
 
-            <label>Confirm Password</label>
-            <input
-            required
-              type="password"
-              placeholder="Confirm Your Password"
-              className="info-input"
-              value={confirm_password}
-              onChange={(e) => setconfirm_password(e.target.value)}
-              name="c_password"
-            />
-          </div>
-          {passwordError && <p className="error">{passwordError}</p>}
+                <input
+                  required
+                  type="password"
+                  placeholder="Confirm Your Password"
+                  className="info-input"
+                  value={confirm_password}
+                  onChange={(e) => setconfirm_password(e.target.value)}
+                  name="c_password"
+                />
+              </div>
 
-          <button className="button info-button" type="submit">
-            Signup
-          </button>
+              {passwordError && <p className="error">{passwordError}</p>}
 
-          {signupStatus === "error" && (
-            <p className="toast error">Signup failed. Please try again.</p>
-          )}
+              <button className="button info-button" type="submit">
+                Signup{" "}
+              </button>
 
-          <div className="login_option">
-            <span>
-              <Link to="/login">Already have an account? Login</Link>
-            </span>
+              <div className="login_option">
+                <span>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to="/login"
+                  >
+                    Already have an account? Login
+                  </Link>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
+      <ToastContainer />
     </div>
   );
 };

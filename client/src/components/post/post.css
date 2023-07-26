@@ -7,6 +7,17 @@
     gap: 1rem;
 }
 
+.profile-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
 .username{
     color: #DD8762;
 }
@@ -22,7 +33,28 @@
 .postReact,
 .reactDetails{
     display: flex;
-    align-items: flex-start;
+    flex-direction: row-reverse;
     gap: 1.5rem;
     color: var(--buttonHV);
+}
+
+.fa:hover{
+    cursor: pointer;
+}
+
+.CommentShare{
+    background-color: var(--inputColor);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+}
+
+.cs-button{
+    margin-top: 0.5rem;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 12px;
 }

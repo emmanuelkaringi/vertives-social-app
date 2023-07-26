@@ -1,7 +1,7 @@
-async function getUser(username, email , pool) {
-  
+async function getUserWithFollowersAndFollowing(username, email, pool) {
   if (pool.connected) {
-    let userCheck = await pool.request()
+    let userCheck = await pool
+      .request()
       .input("username", username)
       .input("email", email)
       .query(
@@ -13,11 +13,10 @@ async function getUser(username, email , pool) {
       throw new Error("User not found");
     }
 
-    let user = userCheck.recordset[0];
-    console.log(user);
+    let user = userCheck.recordset[0]
 
     return user;
   }
 }
 
-module.exports = getUser;
+module.exports = getUserWithFollowersAndFollowing;

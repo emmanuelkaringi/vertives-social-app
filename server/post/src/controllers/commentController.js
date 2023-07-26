@@ -15,7 +15,7 @@ async function createComment(req, res) {
             res.json({
                 success: true,
                 message: "Comment added successfully",
-                data: results.recordsets[0]
+                data: results.recordset[0]
             });
         } else {
             throw new Error("Internal server error");
@@ -32,7 +32,7 @@ async function createComment(req, res) {
 
 async function getComments(req, res) {
     try {
-      const { post_id } = req.body;
+      const { post_id } = req.params;;
       const pool = req.pool;
   
       if (pool.connected) {

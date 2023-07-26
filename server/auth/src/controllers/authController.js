@@ -51,26 +51,32 @@ module.exports = {
 
   loginUser: async (req, res) => {
     let { username, email, password } = req.body;
-    const pool  = req.pool;
-
+    const pool = req.pool;
+  
     try {
       let user = await getUser(username, email, pool);
-      
+  
       if (!user) {
         return res.status(404).json({ error: "User not found. Please check your email/username and password." });
       }
-      
+  
+      // Check if the user account is deleted
+      if (user.is_deleted === 1) {
+        return res.status(401).json({ error: "Your account has been deleted. Please contact support for assistance." });
+      }
+  
       let passwordMatch = await bcrypt.compare(password, user.password);
-      
+  
       if (!passwordMatch) {
         return res.status(401).json({ error: "Incorrect password. Please try again." });
       }
       req.session.authorized = true;
       req.session.user = user;
-
+  
       res.json({
         success: true,
         message: "Login successful",
+        user: user,
       });
     } catch (error) {
       console.error("Error:", error);

@@ -13,6 +13,10 @@
     --video: #455A64
   }
 
+  *{
+    margin: 0;
+}
+
   .App{
     overflow: hidden;
     color: var(--black);
@@ -36,6 +40,11 @@
     color: var(--buttonHV);
     background: transparent;
     border: 2px solid var(--buttonHV);
+  }
+
+  .button:disabled {
+    background: silver;
+    pointer-events: none;
   }
 
 

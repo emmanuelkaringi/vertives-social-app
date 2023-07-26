@@ -1,92 +1,87 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../../actions/AuthAction";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Auth.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.authReducer.loading);
   const navigate = useNavigate();
-  const [username, setusername] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const loginData = {
-      // If the input contains an "@" symbol, it's considered an email; otherwise, it's a username.
-      email: /@/.test(username) ? username : "",
-      username: /@/.test(username) ? "" : username,
+      username,
       password,
     };
 
-    console.log(loginData);
-    // Store the token in localStorage
-
     try {
-      const response = await axios.post(
-        "http://localhost:4000/login",
-        loginData,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(response);
-
-      // Handle successful login response here
-
+      await dispatch(logIn(loginData));
+      toast.success("Logged in successfully.");
       navigate("/feed");
     } catch (error) {
-      if (error.response) {
-        // Handle server errors
-        setError(error.response.data.error);
-      } else if (error.request) {
-        // Handle no response from server
-        setError("No response from server. Please try again later.");
-      } else {
-        // Handle other errors
-        setError("An error occurred. Please try again later.");
-      }
+      console.log(error);
+      toast.error("Log In failed, try again later");
     }
   };
 
   return (
-    <div className="Auth">
-      <form className="info-form auth-form" onSubmit={handleSubmit}>
-        <h3>Log In</h3>
+    <div className="login">
+      <div className="loginWrapper">
+        <div className="loginLeft">
+          <h3 className="loginLogo">Vertives</h3>
+          <span className="loginDesc">Connect with Authenticity</span>
+        </div>
+        <div className="loginRight">
+          <div className="loginBox">
+            <form onSubmit={handleSubmit}>
+              <h3>Login</h3>
+              <input
+                type="text"
+                placeholder="Username"
+                className="info-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+              />
+              <input
+                type="password"
+                placeholder="Enter a Password"
+                className="info-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+              />
 
-        <div>
-          <label>Email or Username</label>
-          <input
-            type="text"
-            placeholder="Email or Username"
-            className="info-input"
-            value={username}
-            onChange={(e) => setusername(e.target.value)}
-            name="username"
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter a Password"
-            className="info-input"
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-            name="password"
-          />
+              <button
+                className="button info-button"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Login"}
+              </button>
 
-          <button className="button info-button" type="submit">
-            Login
-          </button>
-          {error && <p className="error">{error}</p>}
-
-          <div className="login_option">
-            <span style={{ fontSize: "12px" }}>
-              <Link to="/signup">Don't have an account? Signup</Link>
-            </span>
+              <div className="login_option">
+                <span style={{ fontSize: "12px" }}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to="/"
+                  >
+                    Don't have an account? Signup
+                  </Link>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
+      <ToastContainer />
     </div>
   );
 };

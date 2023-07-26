@@ -1,22 +1,21 @@
 CREATE OR ALTER PROCEDURE social.UnlikePost
-    @user_id UNIQUEIDENTIFIER,
+    @sender_id UNIQUEIDENTIFIER,
     @post_id UNIQUEIDENTIFIER
 AS
 BEGIN
-
     DECLARE @like_count INT;
 
     -- Check if the user has already liked the post
     IF EXISTS (
         SELECT 1
         FROM social.likes
-        WHERE sender_id = @user_id
+        WHERE sender_id = @sender_id
         AND post_id = @post_id
     )
     BEGIN
         -- Delete the like entry
         DELETE FROM social.likes
-        WHERE sender_id = @user_id
+        WHERE sender_id = @sender_id
         AND post_id = @post_id;
 
         -- Update the like count in the posts table
@@ -30,11 +29,8 @@ BEGIN
         FROM social.posts
         WHERE post_id = @post_id;
 
-        -- Remove the corresponding entry from the notifications table if it exists
-        DELETE FROM social.notifications
-        WHERE recipient_id = @user_id
-        AND post_id = @post_id
-        AND notification_type = 'Like';
+        -- Return the updated like count
+        SELECT @like_count AS like_count;
     END
     ELSE
     BEGIN
@@ -42,7 +38,4 @@ BEGIN
         RAISERROR('User has not liked the post.', 16, 1);
         RETURN;
     END;
-
-    -- Return the updated like count
-    SELECT @like_count AS like_count;
 END;
