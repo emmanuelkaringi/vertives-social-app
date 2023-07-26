@@ -63,75 +63,81 @@ const SignUp = () => {
           <div className="signupBox">
             <form onSubmit={handleSubmit}>
               <h3>Sign up</h3>
-              <input
-                required
-                type="text"
-                placeholder="Full Name"
-                className="info-input"
-                value={full_name}
-                onChange={(e) => setfull_name(e.target.value)}
-                name="fullname"
-              />
+              <div className="input-row">
+                <input
+                  required
+                  type="text"
+                  placeholder="Full Name"
+                  className="info-input"
+                  value={full_name}
+                  onChange={(e) => setfull_name(e.target.value)}
+                  name="fullname"
+                />
 
-              <input
-                required
-                type="text"
-                placeholder="Username"
-                className="info-input"
-                value={username}
-                onChange={(e) => setusername(e.target.value)}
-                name="username"
-              />
+                <input
+                  required
+                  type="text"
+                  placeholder="Username"
+                  className="info-input"
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
+                  name="username"
+                />
+              </div>
 
               <input
                 required
                 type="email"
                 placeholder="Email"
-                className="info-input"
+                className="info-input single"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
                 name="email"
               />
 
-              <input
-                required
-                type="date"
-                placeholder="Date of Birth"
-                className="info-input"
-                value={DOB}
-                onChange={(e) => setDOB(e.target.value)}
-                name="DOB"
-              />
+              <div className="input-row">
+                <input
+                  required
+                  type="date"
+                  placeholder="Date of Birth"
+                  className="info-input"
+                  value={DOB}
+                  onChange={(e) => setDOB(e.target.value)}
+                  name="DOB"
+                />
 
-              <input
-                required
-                type="text"
-                placeholder="City"
-                className="info-input"
-                value={city}
-                onChange={(e) => setcity(e.target.value)}
-                name="city"
-              />
+                <input
+                  required
+                  type="text"
+                  placeholder="City"
+                  className="info-input"
+                  value={city}
+                  onChange={(e) => setcity(e.target.value)}
+                  name="city"
+                />
+              </div>
 
-              <input
-                required
-                type="password"
-                placeholder="Enter a Password"
-                className="info-input"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                name="password"
-              />
+              <div className="input-row">
+                <input
+                  required
+                  type="password"
+                  placeholder="Enter a Password"
+                  className="info-input"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  name="password"
+                />
 
-              <input
-                required
-                type="password"
-                placeholder="Confirm Your Password"
-                className="info-input"
-                value={confirm_password}
-                onChange={(e) => setconfirm_password(e.target.value)}
-                name="c_password"
-              />
+                <input
+                  required
+                  type="password"
+                  placeholder="Confirm Your Password"
+                  className="info-input"
+                  value={confirm_password}
+                  onChange={(e) => setconfirm_password(e.target.value)}
+                  name="c_password"
+                />
+              </div>
 
               {passwordError && <p className="error">{passwordError}</p>}
 

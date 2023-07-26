@@ -1,5 +1,22 @@
+const { response } = require("express");
 const config = require("../config/vertivesConfig");
 const mssql = require("mssql");
+
+async function getFollowingStatus(req, res) {
+  try {
+    const followerId = req.user.user_id; // Assuming you have the logged-in user's ID in req.user.user_id
+    const followingId = req.params.userId;
+
+    // Call the getFollowingStatus stored procedure
+    const isFollowing = await getFollowingStatus(followerId, followingId);
+
+    res.json({ isFollowing });
+    console.log(response)
+  } catch (error) {
+    console.error("Error occurred while getting following status:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
 async function getFollowers(req, res) {
   try {
@@ -94,4 +111,4 @@ async function unFollowUser(req, res) {
   }
 }
 
-module.exports = { getFollowers, getFollowing, followUser, unFollowUser };
+module.exports = { getFollowingStatus, getFollowers, getFollowing, followUser, unFollowUser };

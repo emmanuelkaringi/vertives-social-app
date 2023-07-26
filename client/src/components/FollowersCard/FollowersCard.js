@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./followerscard.css";
-
-//import { Followers } from "../../data/followersData";
 import Users from "../users/Users";
 import { getAllUsers } from "../../api/UserRequest";
 

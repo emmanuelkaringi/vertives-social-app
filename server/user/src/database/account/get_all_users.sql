@@ -1,4 +1,4 @@
-CREATE PROCEDURE social.GetAllProfiles
+CREATE OR ALTER PROCEDURE social.GetAllProfiles
 AS
 BEGIN
     SELECT

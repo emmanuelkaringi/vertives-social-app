@@ -34,8 +34,8 @@
   }
   
   .signupBox{
-      height: 600px;
-      padding: 20px;
+      height: 400px;
+      padding: 30px;
       background-color: white;
       border-radius: 10px;
       display: flex;
@@ -43,13 +43,19 @@
       justify-content: space-between;
   }
 
+  
   h3{
     font-size: 2rem;
     color: #303031;
     margin-bottom: 1rem;
-}
-
-.info-input{
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 20px; /* This sets the space between the input elements */
+  }
+  
+  .info-input{
     width: 80%;
     outline: none;
     border: 1px solid #fff;
@@ -57,9 +63,12 @@
     margin-bottom: 10px;
     border-radius: 20px;
     background: var(--inputColor);
-}
-
-.info-input:hover{
+  }
+  .single{
+    width: 90%;
+  }
+  
+  .info-input:hover{
     border: 1px solid rgb(192, 192, 192);
 }
 
@@ -120,7 +129,7 @@
   }
   
   .loginBox{
-      height: 300px;
+      height: 290px;
       padding: 20px;
       background-color: white;
       border-radius: 10px;

@@ -26,6 +26,16 @@ export const updateUser = (id, formData) => async (dispatch) => {
       // Handle any errors here if needed
     }
   };
+  export const getFollowingStatus = (followerId, followingId) => async (dispatch) => {
+    try {
+      dispatch({ type: "FOLLOW_STATUS_REQUEST" });
+      const response = await UserApi.getFollowingStatus(followerId, followingId);
+      dispatch({ type: "FOLLOW_STATUS_SUCCESS", payload: response.data });
+    } catch (error) {
+      console.error("Error fetching following status:", error);
+      dispatch({ type: "FOLLOW_STATUS_FAIL" });
+    }
+  };
 
 export const followUser = (data) => async (dispatch) => {
     dispatch({type: "FOLLOW_USER"})

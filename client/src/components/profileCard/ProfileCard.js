@@ -23,19 +23,19 @@ const ProfileCard = ({ location }) => {
       <div className="followstatus">
         <div>
           <div className="follow">
-            <span>0</span>
+            <span>{user.following_count}</span>
             <span>Following</span>
           </div>
 
           <div className="follow">
-            <span>0</span>
+            <span>{user.followers_count}</span>
             <span>Followers</span>
           </div>
 
           {location === "profilePage" && (
             <>
               <div className="follow">
-                <span>5</span>
+                <span>{user.posts_count}</span>
                 <span>Posts</span>
               </div>
             </>
