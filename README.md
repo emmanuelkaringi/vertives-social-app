@@ -4,6 +4,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/emmanuelkaringi/vertives-social-app?color=purple)
 
 ## Description
+
 Vertives is a social media application that I worked on as I was learning fullstack development. I followed a microservice architecture in this project.
 
 All the stored procedures and triggers can be found in the respective database folders.
@@ -11,32 +12,39 @@ All the stored procedures and triggers can be found in the respective database f
 Feel free to play around with it. I'm open to your contributions to make it better.
 
 ### Signup Page
+
 ![Signup](img/01.Signup.png)
 
 ### Login Page
+
 ![Login Page](img/02.Login.png)
 
 ### HomePage/Feed
+
 ![HomePage/Feed](img/03.Homepage.png)
 
 ### Profile Page
+
 ![Profile Page](img/04.ProfilePage.png)
 
 ### Profile Settings Page
+
 ![Profile Settings Page](img/05.ProfileSettings.png)
 
 ### Search Results
+
 ![Search Results](img/06.SearchResults.png)
 
 ### Follow/Unfollow
+
 ![Follow/Unfollow](img/07.Follow-unfollow.png)
 
 ## Prerequisites
+
 In order to use this repository, you will need to have the following setup in your computer.
 
 ![node:v0.9.0](https://img.shields.io/badge/node-v18.16.0-blue.svg)
 ![npm:v8.15.0](https://img.shields.io/badge/npm-9.5.1-blueviolet.svg)
-
 
 - `node v18.16.0`
 - `npm 9.5.1`
@@ -72,6 +80,7 @@ This section will guide you through setting up and running this repository on yo
 To use the environment variables, create an environment file: `.env` in each microservice `auth`, `user`, `post` and one more for the `client`.
 
 #### Example of backend `.env` file:
+
 ```
 DB_USER="name"
 DB_PWD="password"
@@ -105,7 +114,6 @@ This application has been built with these technologies:
 - Express/node
 - [Cloudinary](https://cloudinary.com/)
 - GitHub Projects
-
 
 ## Authors
 
