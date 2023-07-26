@@ -56,7 +56,7 @@ async function getAllPosts(req, res) {
 
 async function getFollowingUserPosts(req, res) {
     try {
-        let userId = req.body.user_id;  // Assuming the user ID is in the "user_id" property of the request body
+        let userId = req.params;  // Assuming the user ID is in the "user_id" property of the request body
         const pool = req.pool;
 
         if (pool.connected) {
@@ -84,7 +84,7 @@ async function getFollowingUserPosts(req, res) {
 
 async function getFollowingPosts(req, res) {
     try {
-        let userId = req.body.user_id;  // Assuming the user ID is in the "user_id" property of the request body
+        let {userId} = req.params;  // Assuming the user ID is in the "user_id" property of the request body
         const pool = req.pool;
 
         if (pool.connected) {
@@ -113,7 +113,7 @@ async function getFollowingPosts(req, res) {
 
 async function getSinglePost(req, res) {
     try {
-        let postId = req.body.post_id;  // Assuming the user ID is in the "user_id" property of the request body
+        let postId = req.params;  // Assuming the user ID is in the "user_id" property of the request body
         const pool = req.pool;
 
         if (pool.connected) {

@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE social.CreateUser
     @email VARCHAR(255),
     @DOB DATE,
     @city VARCHAR(50),
-    @profilepic_url VARCHAR(MAX) = NULL,
+    @profilepic_url VARCHAR(MAX),
     @password VARCHAR(255)
 AS
 BEGIN
