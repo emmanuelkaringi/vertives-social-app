@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const getUser = require("../utils/getUser");
+const {sendWelcomeMail} = require("../utils/sendWelcomeMail")
+const email_config = require("../config/emailConfig");
+const { createTransport } = require("nodemailer");
 
 module.exports = {
   createUser: async (req, res) => {
@@ -36,6 +39,9 @@ module.exports = {
           .execute("social.CreateUser");
 
         console.log(results);
+
+        const transporter = createTransport(email_config);
+        await sendWelcomeMail(user.email, transporter);
 
         res.json({
           success: true,

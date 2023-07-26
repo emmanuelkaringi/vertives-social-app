@@ -71,7 +71,9 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
   };
 
   const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete your account?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account?"
+    );
     if (confirmDelete) {
       try {
         // Call the deleteUser function to delete the account
@@ -135,7 +137,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             />
           </div>
           <div>
-            Profile Image:
+            <span>Profile Image: </span>
             <input type="file" name="profilepic_url" onChange={onImageChange} />
           </div>
 
@@ -143,7 +145,10 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             <button className="button info-button" onClick={handleSubmit}>
               Update Details
             </button>
-            <button className="button info-button dl-button" onClick={handleDeleteAccount}>
+            <button
+              className="button info-button dl-button"
+              onClick={handleDeleteAccount}
+            >
               Delete Account
             </button>
           </div>

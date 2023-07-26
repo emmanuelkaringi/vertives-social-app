@@ -21,6 +21,7 @@ const Posts = () => {
         response = await axios.get(`http://localhost:4020/feed/following/${user.user_id}`, {
           withCredentials: true,
         });
+        console.log(response)
       } else if (activeTab === "forYou") {
         response = await axios.get('http://localhost:4020/feed/all', {
           withCredentials: true,
